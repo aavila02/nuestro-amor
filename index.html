@@ -307,6 +307,11 @@
             pointer-events: none;
         }
         
+        #hearts-canvas, #hearts-canvas2 {
+            opacity: 1 !important;
+            display: block !important;
+        }
+        
         /* Animations with reduced complexity for mobile */
         @keyframes heartbeat {
             0% { transform: scale(1); }
@@ -348,7 +353,7 @@
 <body>
     <!-- First page with love message -->
     <div class="page active" id="page1">
-        <canvas id="hearts-canvas"></canvas>
+        <canvas id="hearts-canvas" style="display: block; opacity: 1;"></canvas>
         <div class="container">
             <div class="border"></div>
             <div class="heart no-select">❤️</div>
@@ -383,7 +388,7 @@
 
     <!-- Second page with timer -->
     <div class="page" id="page2">
-        <canvas id="hearts-canvas2"></canvas>
+        <canvas id="hearts-canvas2" style="display: block; opacity: 1;"></canvas>
         <div class="timer-page">
             <div class="timer-text no-select">We've been together for:</div>
             <div class="timer-container">
@@ -441,6 +446,10 @@
             setupHearts('hearts-canvas');
             setupHearts('hearts-canvas2');
             
+            // Force redraw canvases (iOS Safari sometimes needs this)
+            document.getElementById('hearts-canvas').style.display = 'block';
+            document.getElementById('hearts-canvas2').style.display = 'block';
+            
             // Pre-load audio to avoid delay
             const audio = document.getElementById('background-music');
             audio.load();
@@ -452,6 +461,10 @@
                 page.classList.remove('active');
             });
             document.getElementById(pageId).classList.add('active');
+            
+            // Ensure both canvases remain visible
+            document.getElementById('hearts-canvas').style.display = 'block';
+            document.getElementById('hearts-canvas2').style.display = 'block';
             
             // Reset scroll position when switching pages
             window.scrollTo(0, 0);
@@ -512,6 +525,10 @@
         function setupHearts(canvasId) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
+            
+            // Make sure canvas is visible
+            canvas.style.display = 'block';
+            canvas.style.opacity = '1';
             
             const ctx = canvas.getContext('2d', { alpha: true });
             
