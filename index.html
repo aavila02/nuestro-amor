@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nuestro Amor</title>
+    <style>
+        /* Base styles optimized for mobile */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overscroll-behavior: none;
+            background-color: #ffccd5;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        .page {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Main page container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 25px 15px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 15px auto;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Text elements */
+        h1 {
+            color: #e75480;
+            margin-bottom: 15px;
+            font-size: 28px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        
+        .spanish-phrase {
+            font-size: 26px;
+            font-weight: bold;
+            color: #333;
+            margin: 15px 0;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeIn 2.5s forwards;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .love-message {
+            font-size: 22px;
+            color: #e75480;
+            margin: 15px 0;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            text-align: center;
+        }
+        
+        .date {
+            font-size: 30px;
+            font-weight: bold;
+            color: #e75480;
+            margin: 20px 0;
+            animation: pulse 3s infinite;
+            text-align: center;
+        }
+        
+        .heart {
+            font-size: 50px;
+            color: #e75480;
+            margin: 8px 0;
+            animation: heartbeat 1.5s infinite;
+            will-change: transform;
+        }
+        
+        .signature {
+            font-family: 'Brush Script MT', cursive, -apple-system, BlinkMacSystemFont;
+            font-size: 26px;
+            color: #e75480;
+            margin-top: 12px;
+            text-align: right;
+            width: 100%;
+            opacity: 0;
+            animation: fadeIn 3.5s forwards;
+        }
+        
+        /* Buttons and controls */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background-color: #e75480;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: transform 0.2s, background-color 0.2s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            text-align: center;
+            width: auto;
+            max-width: 100%;
+            -webkit-appearance: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .button:active {
+            transform: scale(0.98);
+            background-color: #d64c77;
+        }
+        
+        .button svg {
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .back-button {
+            background-color: #e75480;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            -webkit-appearance: none;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:active {
+            transform: scale(0.98);
+            background-color: #d64c77;
+        }
+        
+        .back-button svg {
+            margin-right: 8px;
+        }
+        
+        .music-controls {
+            margin-top: 15px;
+        }
+        
+        .music-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: rgba(231, 84, 128, 0.2);
+            color: #e75480;
+            border: 1px solid #e75480;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            -webkit-appearance: none;
+        }
+        
+        .music-button:active {
+            background-color: rgba(231, 84, 128, 0.3);
+        }
+        
+        /* Timer styles */
+        .timer-page {
+            background-color: #ffccd5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            padding: 15px;
+        }
+        
+        .timer-text {
+            font-size: 28px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 350px;
+        }
+        
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 8px;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 4px;
+            will-change: transform;
+        }
+        
+        .timer-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .timer-label {
+            font-size: 12px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin-top: 3px;
+        }
+        
+        .timer-separator {
+            font-size: 28px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin: 0 2px;
+        }
+        
+        .timer-caption {
+            font-size: 20px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+            margin: 15px 0 40px 0;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .red-heart {
+            color: #ff2442;
+            font-size: 24px;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 5px;
+            will-change: transform;
+        }
+        
+        .border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            pointer-events: none;
+            z-index: -1;
+            animation: borderPulse 4s infinite;
+            will-change: box-shadow;
+        }
+        
+        /* Canvas positioning */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Animations with reduced complexity for mobile */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(232, 84, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0); }
+        }
+        
+        /* iOS-specific fixes */
+        input, button {
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+        
+        /* Prevent text selection */
+        .no-select {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- First page with love message -->
+    <div class="page active" id="page1">
+        <canvas id="hearts-canvas"></canvas>
+        <div class="container">
+            <div class="border"></div>
+            <div class="heart no-select">❤️</div>
+            <div class="spanish-phrase no-select">"Sin ti no sé vivir"</div>
+            <div class="date no-select">March 8th, 2025</div>
+            <div class="love-message no-select">Te amo mi niña</div>
+            <div class="heart no-select">❤️</div>
+            <div class="signature no-select">- Anthony</div>
+            <button class="button no-select" onclick="showPage('page2')">
+                See how long we've been together
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="music-controls">
+                <button id="play-music" class="music-button no-select" onclick="toggleMusic()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                    Play our song
+                </button>
+            </div>
+        </div>
+        <!-- Audio element - using preloaded attribute to load faster -->
+        <audio id="background-music" preload="auto" loop>
+            <source src="te quiero tanto 4.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Second page with timer -->
+    <div class="page" id="page2">
+        <canvas id="hearts-canvas2"></canvas>
+        <div class="timer-page">
+            <div class="timer-text no-select">We've been together for:</div>
+            <div class="timer-container">
+                <div class="timer-box">
+                    <div class="timer-value no-select" id="days">0</div>
+                    <div class="timer-label no-select">Days</div>
+                </div>
+                <div class="timer-separator no-select">:</div>
+                <div class="timer-box">
+                    <div class="timer-value no-select" id="hours">0</div>
+                    <div class="timer-label no-select">Hours</div>
+                </div>
+                <div class="timer-separator no-select">:</div>
+                <div class="timer-box">
+                    <div class="timer-value no-select" id="minutes">0</div>
+                    <div class="timer-label no-select">Minutes</div>
+                </div>
+                <div class="timer-separator no-select">:</div>
+                <div class="timer-box">
+                    <div class="timer-value no-select" id="seconds">0</div>
+                    <div class="timer-label no-select">Seconds</div>
+                </div>
+            </div>
+            <div class="timer-caption no-select">... and forever counting <span class="red-heart">❤️</span></div>
+            
+            <button class="back-button no-select" onclick="showPage('page1')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+            <div class="signature no-select" style="margin-top: 20px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+        </div>
+    </div>
+
+    <script>
+        // Load high-priority elements first
+        document.addEventListener('DOMContentLoaded', function() {
+            // iOS Safari fixes
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault(); // Disable pinch zoom
+            });
+            
+            // Prevent bounce effect on iOS Safari
+            document.body.addEventListener('touchmove', function(e) {
+                if (e.target === document.body) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Initialize timer immediately
+            updateTimer();
+            
+            // Setup hearts with delayed initialization to improve initial page load
+            setTimeout(function() {
+                setupHearts('hearts-canvas');
+                setupHearts('hearts-canvas2');
+            }, 300);
+            
+            // Pre-load audio to avoid delay
+            const audio = document.getElementById('background-music');
+            audio.load();
+        });
+
+        // Function to switch pages with a fast transition
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Reset scroll position when switching pages
+            window.scrollTo(0, 0);
+        }
+
+        // Timer function optimized for performance
+        let lastUpdateTime = 0;
+        const startDate = new Date(2025, 2, 8); // March 8th, 2025
+        
+        function updateTimer() {
+            // Get current date and time
+            const now = new Date();
+            
+            // Only update UI once per second for efficiency
+            if (now - lastUpdateTime < 1000) {
+                requestAnimationFrame(updateTimer);
+                return;
+            }
+            
+            lastUpdateTime = now;
+            
+            // Calculate time difference
+            let timeDiff = now - startDate;
+            
+            // If current date is before start date, show zeros
+            if (timeDiff < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                requestAnimationFrame(updateTimer);
+                return;
+            }
+            
+            // Calculate time components
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            timeDiff -= days * (1000 * 60 * 60 * 24);
+            
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+            timeDiff -= hours * (1000 * 60 * 60);
+            
+            const minutes = Math.floor(timeDiff / (1000 * 60));
+            timeDiff -= minutes * (1000 * 60);
+            
+            const seconds = Math.floor(timeDiff / 1000);
+            
+            // Update the display efficiently
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            
+            // Continue animation loop
+            requestAnimationFrame(updateTimer);
+        }
+        
+        // Optimized floating hearts animation
+        function setupHearts(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d', { alpha: true });
+            
+            // Properly size canvas with device pixel ratio for sharp rendering
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            
+            ctx.scale(dpr, dpr);
+            
+            const hearts = [];
+            const colors = ['#ffb6c1', '#e75480', '#ff4d6d', '#ff1a4b'];
+            let animating = true;
+            
+            // Draw heart shape efficiently
+            function drawHeart(x, y, size, color) {
+                ctx.fillStyle = color;
+                ctx.globalAlpha = 1;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, y + size * 0.25);
+                ctx.bezierCurveTo(
+                    x, y, 
+                    x - size * 0.5, y, 
+                    x - size * 0.5, y + size * 0.25
+                );
+                ctx.bezierCurveTo(
+                    x - size * 0.5, y + size * 0.4, 
+                    x, y + size * 0.7, 
+                    x, y + size * 0.8
+                );
+                ctx.bezierCurveTo(
+                    x, y + size * 0.7, 
+                    x + size * 0.5, y + size * 0.4, 
+                    x + size * 0.5, y + size * 0.25
+                );
+                ctx.bezierCurveTo(
+                    x + size * 0.5, y, 
+                    x, y, 
+                    x, y + size * 0.25
+                );
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            // Create fewer hearts for better performance
+            function createHeart() {
+                if (!animating) return;
+                
+                // Limit the total number of hearts for performance
+                if (hearts.length > 20) return;
+                
+                const x = Math.random() * rect.width;
+                const y = rect.height + 40;
+                const size = Math.random() * 10 + 8; // Smaller hearts
+                const speed = Math.random() * 0.8 + 0.4; // Slower movement
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const opacity = Math.random() * 0.5 + 0.3;
+                const wobbleSpeed = Math.random() * 0.02 + 0.01; // Less wobble
+                const wobbleSize = Math.random() * 15 + 5; // Smaller wobble range
+                
+                hearts.push({
+                    x: x,
+                    y: y,
+                    origX: x,
+                    size: size,
+                    speed: speed,
+                    color: color,
+                    opacity: opacity,
+                    wobbleSpeed: wobbleSpeed,
+                    wobbleSize: wobbleSize,
+                    angle: 0
+                });
+                
+                // Schedule next heart creation with longer intervals
+                setTimeout(createHeart, Math.random() * 1200 + 500);
+            }
+
+            // Optimized animation loop with RAF
+            let lastTime = 0;
+            function animate(timestamp) {
+                if (!animating) return;
+                
+                requestAnimationFrame(animate);
+                
+                // Throttle to ~30fps for better performance on mobile
+                if (timestamp - lastTime < 33) return;
+                lastTime = timestamp;
+                
+                ctx.clearRect(0, 0, rect.width, rect.height);
+
+                for (let i = 0; i < hearts.length; i++) {
+                    const h = hearts[i];
+                    
+                    // Update position
+                    h.y -= h.speed;
+                    h.angle += h.wobbleSpeed;
+                    h.x = h.origX + Math.sin(h.angle) * h.wobbleSize;
+                    
+                    // Remove hearts that have gone off screen
+                    if (h.y < -30) {
+                        hearts.splice(i, 1);
+                        i--;
+                        continue;
+                    }
+                    
+                    // Draw the heart
+                    ctx.globalAlpha = h.opacity;
+                    drawHeart(h.x, h.y, h.size, h.color);
+                }
+            }
+
+            // Start animation and create first heart
+            animate();
+            createHeart();
+            
+            // Create fewer initial hearts
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    if (!animating) return;
+                    
+                    const x = Math.random() * rect.width;
+                    const y = Math.random() * rect.height;
+                    const size = Math.random() * 10 + 8;
+                    const speed = Math.random() * 0.8 + 0.4;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const opacity = Math.random() * 0.5 + 0.3;
+                    const wobbleSpeed = Math.random() * 0.02 + 0.01;
+                    const wobbleSize = Math.random() * 15 + 5;
+                    
+                    hearts.push({
+                        x: x,
+                        y: y,
+                        origX: x,
+                        size: size,
+                        speed: speed,
+                        color: color,
+                        opacity: opacity,
+                        wobbleSpeed: wobbleSpeed,
+                        wobbleSize: wobbleSize,
+                        angle: 0
+                    });
+                }, i * 400);
+            }
+            
+            // Proper visibility handling
+            document.addEventListener('visibilitychange', function() {
+                animating = !document.hidden;
+                
+                if (animating) {
+                    lastTime = 0;
+                    animate();
+                    createHeart();
+                }
+            });
+            
+            // Efficient resize handling with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    const rect = canvas.getBoundingClientRect();
+                    canvas.width = rect.width * dpr;
+                    canvas.height = rect.height * dpr;
+                    canvas.style.width = rect.width + 'px';
+                    canvas.style.height = rect.height + 'px';
+                    ctx.scale(dpr, dpr);
+                }, 250);
+            });
+        }
+
+        // Audio control optimized for iOS
+        let audioInitialized = false;
+        
+        function toggleMusic() {
+            const audio = document.getElementById('background-music');
+            const button = document.getElementById('play-music');
+            
+            if (!audioInitialized) {
+                // iOS requires user interaction to start audio
+                audio.play().then(() => {
+                    audioInitialized = true;
+                    updateMusicButton(button, false);
+                }).catch(error => {
+                    console.log('Audio play failed:', error);
+                    // Show "Play" button if auto-play failed
+                    updateMusicButton(button, true);
+                });
+            } else if (audio.paused) {
+                audio.play().then(() => {
+                    updateMusicButton(button, false);
+                }).catch(error => {
+                    console.log('Audio play failed:', error);
+                });
+            } else {
+                audio.pause();
+                updateMusicButton(button, true);
+            }
+        }
+        
+        function updateMusicButton(button, isPaused) {
+            if (isPaused) {
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                    Play our song
+                `;
+            } else {
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                    </svg>
+                    Pause music
+                `;
+            }
+        }
+        
+        // Handle iOS specific issues
+        document.addEventListener('touchstart', function() {
+            // iOS sometimes requires a touch event to properly interact with the page
+        }, false);
+    </script>
+</body>
+</html>
