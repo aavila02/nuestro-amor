@@ -303,7 +303,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
         }
         
@@ -437,11 +437,9 @@
             // Initialize timer immediately
             updateTimer();
             
-            // Setup hearts with delayed initialization to improve initial page load
-            setTimeout(function() {
-                setupHearts('hearts-canvas');
-                setupHearts('hearts-canvas2');
-            }, 300);
+            // Setup hearts immediately for better visual effect
+            setupHearts('hearts-canvas');
+            setupHearts('hearts-canvas2');
             
             // Pre-load audio to avoid delay
             const audio = document.getElementById('background-music');
@@ -568,7 +566,7 @@
                 if (!animating) return;
                 
                 // Limit the total number of hearts for performance
-                if (hearts.length > 20) return;
+                if (hearts.length > 30) return;
                 
                 const x = Math.random() * rect.width;
                 const y = rect.height + 40;
@@ -592,8 +590,8 @@
                     angle: 0
                 });
                 
-                // Schedule next heart creation with longer intervals
-                setTimeout(createHeart, Math.random() * 1200 + 500);
+                // Schedule next heart creation with shorter intervals for more hearts
+                setTimeout(createHeart, Math.random() * 800 + 200);
             }
 
             // Optimized animation loop with RAF
@@ -608,6 +606,11 @@
                 lastTime = timestamp;
                 
                 ctx.clearRect(0, 0, rect.width, rect.height);
+
+                // Make sure we have enough hearts
+                if (hearts.length < 15 && Math.random() < 0.1) {
+                    createHeart();
+                }
 
                 for (let i = 0; i < hearts.length; i++) {
                     const h = hearts[i];
