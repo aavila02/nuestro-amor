@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Nuestro Amor3</title>
+    <title>Nuestro Amor</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Arial', sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #ffccd5;
             margin: 0;
             padding: 0;
@@ -20,9 +18,6 @@
             text-align: center;
             color: #333;
             overflow: hidden;
-            -webkit-overflow-scrolling: touch;
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
-            touch-action: manipulation;
         }
         .container {
             width: 90%;
@@ -44,7 +39,6 @@
             color: #e75480;
             margin-bottom: 15px;
             font-size: 32px;
-            -webkit-animation: fadeIn 2s forwards;
             animation: fadeIn 2s forwards;
         }
         .spanish-phrase {
@@ -53,7 +47,6 @@
             color: #333;
             margin: 20px 0;
             font-style: italic;
-            -webkit-animation: fadeIn 2.5s forwards;
             animation: fadeIn 2.5s forwards;
             text-align: center;
             line-height: 1.3;
@@ -62,7 +55,6 @@
             font-size: 24px;
             color: #e75480;
             margin: 20px 0;
-            -webkit-animation: fadeIn 3s forwards;
             animation: fadeIn 3s forwards;
             text-align: center;
         }
@@ -71,7 +63,6 @@
             font-weight: bold;
             color: #e75480;
             margin: 25px 0;
-            -webkit-animation: pulse 3s infinite;
             animation: pulse 3s infinite;
             text-align: center;
         }
@@ -79,7 +70,6 @@
             font-size: 60px;
             color: #e75480;
             margin: 10px 0;
-            -webkit-animation: heartbeat 1.5s infinite;
             animation: heartbeat 1.5s infinite;
         }
         .button {
@@ -91,7 +81,6 @@
             border-radius: 30px;
             font-size: 16px;
             margin-top: 20px;
-            -webkit-transition: transform 0.3s, box-shadow 0.3s;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
             border: none;
@@ -100,8 +89,6 @@
             text-align: center;
             width: auto;
             max-width: 90%;
-            -webkit-appearance: none;
-            -webkit-touch-callout: none;
         }
         
         /* Responsive adjustments for larger screens */
@@ -134,37 +121,19 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-        .button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
         .button svg {
             margin-left: 8px;
             vertical-align: middle;
-        }
-        @-webkit-keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
         @keyframes heartbeat {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-        @-webkit-keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
         @keyframes pulse {
             0% { opacity: 0.7; }
             50% { opacity: 1; }
             100% { opacity: 0.7; }
-        }
-        @-webkit-keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -189,13 +158,7 @@
             border-radius: 15px;
             pointer-events: none;
             z-index: -1;
-            -webkit-animation: borderPulse 4s infinite;
             animation: borderPulse 4s infinite;
-        }
-        @-webkit-keyframes borderPulse {
-            0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(232, 84, 128, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0); }
         }
         @keyframes borderPulse {
             0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
@@ -302,7 +265,6 @@
         .red-heart {
             color: #ff2442;
             font-size: 28px;
-            -webkit-animation: heartbeat 1.5s infinite;
             animation: heartbeat 1.5s infinite;
             display: inline-block;
             vertical-align: middle;
@@ -320,12 +282,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            -webkit-appearance: none;
-            -webkit-touch-callout: none;
-        }
-        .back-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .music-controls {
             margin-top: 15px;
@@ -344,15 +300,9 @@
             cursor: pointer;
             font-size: 14px;
             transition: all 0.3s ease;
-            -webkit-appearance: none;
-            -webkit-touch-callout: none;
         }
         .music-button:hover {
             background-color: rgba(231, 84, 128, 0.3);
-        }
-        .music-button:active {
-            background-color: rgba(231, 84, 128, 0.4);
-            transform: translateY(1px);
         }
         .music-button svg {
             transition: all 0.3s ease;
@@ -365,7 +315,6 @@
             margin-top: 15px;
             text-align: right;
             width: 100%;
-            -webkit-animation: fadeIn 3.5s forwards;
             animation: fadeIn 3.5s forwards;
         }
         @media (min-width: 768px) {
@@ -403,7 +352,7 @@
                 </button>
             </div>
         </div>
-        <audio id="background-music" preload="auto" loop>
+        <audio id="background-music" loop>
             <source src="te quiero tanto 4.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
@@ -447,25 +396,12 @@
     </div>
 
     <script>
-        // Prevent default touch behavior to improve responsiveness
-        document.addEventListener('touchstart', function(event) {
-            if(event.target.nodeName !== 'INPUT' && event.target.nodeName !== 'TEXTAREA') {
-                event.preventDefault();
-            }
-        }, { passive: false });
-        
         // Function to show specific page
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             document.getElementById(pageId).classList.add('active');
-            
-            // Force layout recalculation for Safari
-            window.scrollTo(0, 0);
-            setTimeout(function() {
-                window.scrollTo(0, 0);
-            }, 10);
         }
 
         // Setup the relationship timer
@@ -507,44 +443,11 @@
             document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
         }
         
-        // Initialize audio for iOS
-        function initAudio() {
-            const audio = document.getElementById('background-music');
-            audio.load(); // Force preload
-            
-            // Create silent audio context to unlock audio
-            document.addEventListener('touchstart', function() {
-                // Create context for iOS
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (AudioContext) {
-                    const audioContext = new AudioContext();
-                    
-                    // Create and play a short silent buffer
-                    const buffer = audioContext.createBuffer(1, 1, 22050);
-                    const source = audioContext.createBufferSource();
-                    source.buffer = buffer;
-                    source.connect(audioContext.destination);
-                    source.start(0);
-                    
-                    // Resume audio context if suspended
-                    if (audioContext.state === 'suspended') {
-                        audioContext.resume();
-                    }
-                }
-                
-                // Only need to do this once
-                document.removeEventListener('touchstart', initAudio);
-            }, { once: true });
-        }
-        
         // Update the timer every second
         setInterval(updateTimer, 1000);
         updateTimer(); // Initial update
-        
-        // Initialize audio
-        initAudio();
 
-        // Setup floating hearts background with reduced intensity for mobile
+        // Setup floating hearts background
         document.addEventListener('DOMContentLoaded', function() {
             // Run hearts effect for first page
             setupHearts('hearts-canvas');
@@ -558,26 +461,11 @@
             if (!canvas) return; // Skip if no canvas
             
             const ctx = canvas.getContext('2d');
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            
-            // Set canvas dimensions and adjust for device pixel ratio
-            function resizeCanvas() {
-                const pixelRatio = window.devicePixelRatio || 1;
-                canvas.width = window.innerWidth * pixelRatio;
-                canvas.height = window.innerHeight * pixelRatio;
-                canvas.style.width = window.innerWidth + 'px';
-                canvas.style.height = window.innerHeight + 'px';
-                ctx.scale(pixelRatio, pixelRatio);
-            }
-            
-            resizeCanvas();
-            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
             let hearts = [];
             const colors = ['#ffb6c1', '#e75480', '#ff4d6d', '#ff1a4b'];
-            
-            // Reduce the number of hearts for mobile
-            const maxHearts = isMobile ? 15 : 30;
-            const heartCreationDelay = isMobile ? 1200 : 800;
             
             function drawHeart(x, y, size, color) {
                 ctx.fillStyle = color;
@@ -610,18 +498,14 @@
             }
 
             function createHeart() {
-                // Limit the maximum number of hearts
-                if (hearts.length >= maxHearts) return;
-                
-                const x = Math.random() * window.innerWidth;
-                const y = window.innerHeight + 50;
+                const x = Math.random() * canvas.width;
+                const y = canvas.height + 50;
                 const size = Math.random() * 15 + 10;
-                // Slower speed for better performance
-                const speed = Math.random() * 0.8 + 0.3;
+                const speed = Math.random() * 1 + 0.5;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 const opacity = Math.random() * 0.5 + 0.3;
-                const wobbleSpeed = Math.random() * 0.02 + 0.01;
-                const wobbleSize = Math.random() * 20 + 5;
+                const wobbleSpeed = Math.random() * 0.03 + 0.01;
+                const wobbleSize = Math.random() * 25 + 5;
                 
                 hearts.push({
                     x: x,
@@ -636,21 +520,13 @@
                     angle: 0
                 });
                 
-                // Schedule next heart creation with a limit
-                setTimeout(createHeart, Math.random() * heartCreationDelay + 300);
+                // Schedule next heart creation
+                setTimeout(createHeart, Math.random() * 1000 + 300);
             }
 
-            let lastTime = 0;
-            const fpsLimit = isMobile ? 30 : 60; // Lower FPS for mobile
-            
-            function animate(timestamp) {
+            function animate() {
                 requestAnimationFrame(animate);
-                
-                // FPS throttling
-                if (timestamp - lastTime < 1000 / fpsLimit) return;
-                lastTime = timestamp;
-                
-                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 for (let i = 0; i < hearts.length; i++) {
                     const h = hearts[i];
@@ -677,20 +553,17 @@
             animate();
             createHeart();
             
-            // Create initial set of hearts - fewer for mobile
-            const initialHearts = isMobile ? 5 : 10;
-            for (let i = 0; i < initialHearts; i++) {
+            // Create initial set of hearts
+            for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
-                    if (hearts.length >= maxHearts) return;
-                    
-                    const x = Math.random() * window.innerWidth;
-                    const y = Math.random() * window.innerHeight;
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
                     const size = Math.random() * 15 + 10;
-                    const speed = Math.random() * 0.8 + 0.3;
+                    const speed = Math.random() * 1 + 0.5;
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     const opacity = Math.random() * 0.5 + 0.3;
-                    const wobbleSpeed = Math.random() * 0.02 + 0.01;
-                    const wobbleSize = Math.random() * 20 + 5;
+                    const wobbleSpeed = Math.random() * 0.03 + 0.01;
+                    const wobbleSize = Math.random() * 25 + 5;
                     
                     hearts.push({
                         x: x,
@@ -707,18 +580,10 @@
                 }, i * 300);
             }
             
-            // Handle window resize properly
-            let resizeTimeout;
+            // Adjust for window resizing
             window.addEventListener('resize', function() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(function() {
-                    resizeCanvas();
-                }, 100);
-            });
-            
-            // Handle orientation change
-            window.addEventListener('orientationchange', function() {
-                setTimeout(resizeCanvas, 300);
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             });
         }
 
@@ -726,33 +591,15 @@
             const audio = document.getElementById('background-music');
             const button = document.getElementById('play-music');
             
-            // Special handling for iOS
             if (audio.paused) {
-                // iOS requires user interaction to play audio
-                const playPromise = audio.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(function() {
-                        // Audio is playing
-                        button.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="6" y="4" width="4" height="16"/>
-                                <rect x="14" y="4" width="4" height="16"/>
-                            </svg>
-                            Pause music
-                        `;
-                    }).catch(function(error) {
-                        // Auto-play was prevented
-                        console.log("Audio play was prevented:", error);
-                        
-                        // Try again after a small delay
-                        setTimeout(function() {
-                            audio.play().catch(function(e) {
-                                console.log("Second attempt failed:", e);
-                            });
-                        }, 100);
-                    });
-                }
+                audio.play();
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                    </svg>
+                    Pause music
+                `;
             } else {
                 audio.pause();
                 button.innerHTML = `
@@ -765,19 +612,6 @@
                 `;
             }
         }
-
-        // Fix for scroll bounce in iOS
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
-        
-        // Fix for touch delay
-        document.addEventListener('DOMContentLoaded', function() {
-            FastClick.attach(document.body);
-        });
     </script>
-    
-    <!-- Add FastClick to eliminate touch delay -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 </body>
 </html>
