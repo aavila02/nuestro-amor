@@ -3,34 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nuestro Amor2</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Nuestro Amor3</title>
     <style>
-        /* Base styles optimized for mobile */
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        html, body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            height: 100%;
-            width: 100%;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Arial', sans-serif;
+            background-color: #ffccd5;
             margin: 0;
             padding: 0;
-            overscroll-behavior: none;
-            background-color: #ffccd5;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
             color: #333;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            touch-action: manipulation;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            color: #e75480;
+            margin-bottom: 15px;
+            font-size: 32px;
+            -webkit-animation: fadeIn 2s forwards;
+            animation: fadeIn 2s forwards;
+        }
+        .spanish-phrase {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+            font-style: italic;
+            -webkit-animation: fadeIn 2.5s forwards;
+            animation: fadeIn 2.5s forwards;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .love-message {
+            font-size: 24px;
+            color: #e75480;
+            margin: 20px 0;
+            -webkit-animation: fadeIn 3s forwards;
+            animation: fadeIn 3s forwards;
+            text-align: center;
+        }
+        .date {
+            font-size: 36px;
+            font-weight: bold;
+            color: #e75480;
+            margin: 25px 0;
+            -webkit-animation: pulse 3s infinite;
+            animation: pulse 3s infinite;
+            text-align: center;
+        }
+        .heart {
+            font-size: 60px;
+            color: #e75480;
+            margin: 10px 0;
+            -webkit-animation: heartbeat 1.5s infinite;
+            animation: heartbeat 1.5s infinite;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #e75480;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            margin-top: 20px;
+            -webkit-transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            text-align: center;
+            width: auto;
+            max-width: 90%;
+            -webkit-appearance: none;
+            -webkit-touch-callout: none;
         }
         
+        /* Responsive adjustments for larger screens */
+        @media (min-width: 768px) {
+            .container {
+                padding: 40px;
+            }
+            .spanish-phrase {
+                font-size: 32px;
+                margin: 25px 0;
+            }
+            .love-message {
+                font-size: 28px;
+                margin: 25px 0;
+            }
+            .date {
+                font-size: 42px;
+                margin: 30px 0;
+            }
+            .heart {
+                font-size: 80px;
+            }
+            .button {
+                padding: 15px 30px;
+                font-size: 18px;
+                margin-top: 30px;
+            }
+        }
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .button svg {
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        @-webkit-keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @-webkit-keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        @-webkit-keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            pointer-events: none;
+            z-index: -1;
+            -webkit-animation: borderPulse 4s infinite;
+            animation: borderPulse 4s infinite;
+        }
+        @-webkit-keyframes borderPulse {
+            0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(232, 84, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0); }
+        }
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(232, 84, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0); }
+        }
         .page {
             display: none;
             width: 100%;
             min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
         }
-        
         .active {
             display: flex;
             flex-direction: column;
@@ -38,145 +215,122 @@
             justify-content: center;
         }
         
-        /* Main page container */
-        .container {
-            width: 90%;
-            max-width: 400px;
-            padding: 25px 15px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 15px auto;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
+        /* Timer page styling - updated to match screenshot */
+        .timer-page {
+            background-color: #ffccd5;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-        
-        /* Text elements */
-        h1 {
-            color: #e75480;
-            margin-bottom: 15px;
-            font-size: 28px;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-        }
-        
-        .spanish-phrase {
-            font-size: 26px;
-            font-weight: bold;
-            color: #333;
-            margin: 15px 0;
-            font-style: italic;
-            opacity: 0;
-            animation: fadeIn 2.5s forwards;
-            text-align: center;
-            line-height: 1.3;
-        }
-        
-        .love-message {
-            font-size: 22px;
-            color: #e75480;
-            margin: 15px 0;
-            opacity: 0;
-            animation: fadeIn 3s forwards;
-            text-align: center;
-        }
-        
-        .date {
-            font-size: 30px;
-            font-weight: bold;
-            color: #e75480;
-            margin: 20px 0;
-            animation: pulse 3s infinite;
-            text-align: center;
-        }
-        
-        .heart {
-            font-size: 50px;
-            color: #e75480;
-            margin: 8px 0;
-            animation: heartbeat 1.5s infinite;
-            will-change: transform;
-        }
-        
-        .signature {
-            font-family: 'Brush Script MT', cursive, -apple-system, BlinkMacSystemFont;
-            font-size: 26px;
-            color: #e75480;
-            margin-top: 12px;
-            text-align: right;
+            min-height: 100vh;
             width: 100%;
-            opacity: 0;
-            animation: fadeIn 3.5s forwards;
         }
-        
-        /* Buttons and controls */
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 20px;
-            background-color: #e75480;
+        .timer-text {
+            font-size: 36px;
             color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: transform 0.2s, background-color 0.2s;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            white-space: nowrap;
-            text-align: center;
-            width: auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin-bottom: 60px;
+            font-weight: bold;
+        }
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
             max-width: 100%;
-            -webkit-appearance: none;
-            -webkit-touch-callout: none;
+            padding: 0 10px;
+        }
+        .timer-box {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 10px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+        }
+        .timer-value {
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .timer-label {
+            font-size: 16px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin-top: 5px;
+        }
+        .timer-separator {
+            font-size: 40px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            margin: 0 2px;
         }
         
-        .button:active {
-            transform: scale(0.98);
-            background-color: #d64c77;
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .timer-box {
+                width: 120px;
+                height: 120px;
+                padding: 20px;
+                margin: 0 10px;
+            }
+            .timer-value {
+                font-size: 60px;
+            }
+            .timer-label {
+                font-size: 22px;
+                margin-top: 10px;
+            }
+            .timer-separator {
+                font-size: 60px;
+                margin: 0 5px;
+            }
         }
-        
-        .button svg {
-            margin-left: 8px;
+        .timer-caption {
+            font-size: 24px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+            margin: 20px 0 60px 0;
+            font-style: italic;
+        }
+        .red-heart {
+            color: #ff2442;
+            font-size: 28px;
+            -webkit-animation: heartbeat 1.5s infinite;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
             vertical-align: middle;
+            margin-left: 5px;
         }
-        
         .back-button {
             background-color: #e75480;
             color: white;
             border: none;
             border-radius: 30px;
-            padding: 12px 25px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             -webkit-appearance: none;
-            margin-bottom: 30px;
+            -webkit-touch-callout: none;
         }
-        
         .back-button:active {
-            transform: scale(0.98);
-            background-color: #d64c77;
+            transform: translateY(1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
-        
-        .back-button svg {
-            margin-right: 8px;
-        }
-        
         .music-controls {
             margin-top: 15px;
+            opacity: 0.8;
         }
-        
         .music-button {
             display: flex;
             align-items: center;
@@ -189,188 +343,58 @@
             border-radius: 20px;
             cursor: pointer;
             font-size: 14px;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
             -webkit-appearance: none;
+            -webkit-touch-callout: none;
         }
-        
-        .music-button:active {
+        .music-button:hover {
             background-color: rgba(231, 84, 128, 0.3);
         }
-        
-        /* Timer styles */
-        .timer-page {
-            background-color: #ffccd5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            width: 100%;
-            padding: 15px;
+        .music-button:active {
+            background-color: rgba(231, 84, 128, 0.4);
+            transform: translateY(1px);
         }
-        
-        .timer-text {
+        .music-button svg {
+            transition: all 0.3s ease;
+        }
+        /* Signature styling */
+        .signature {
+            font-family: 'Brush Script MT', cursive;
             font-size: 28px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin-bottom: 40px;
-            font-weight: bold;
-            text-align: center;
-        }
-        
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            color: #e75480;
+            margin-top: 15px;
+            text-align: right;
             width: 100%;
-            max-width: 350px;
+            -webkit-animation: fadeIn 3.5s forwards;
+            animation: fadeIn 3.5s forwards;
         }
-        
-        .timer-box {
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            padding: 8px;
-            width: 65px;
-            height: 65px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 4px;
-            will-change: transform;
-        }
-        
-        .timer-value {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-        
-        .timer-label {
-            font-size: 12px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin-top: 3px;
-        }
-        
-        .timer-separator {
-            font-size: 28px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin: 0 2px;
-        }
-        
-        .timer-caption {
-            font-size: 20px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-            margin: 15px 0 40px 0;
-            font-style: italic;
-            text-align: center;
-        }
-        
-        .red-heart {
-            color: #ff2442;
-            font-size: 24px;
-            animation: heartbeat 1.5s infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 5px;
-            will-change: transform;
-        }
-        
-        .border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 2px solid #f8a5c2;
-            border-radius: 15px;
-            pointer-events: none;
-            z-index: -1;
-            animation: borderPulse 4s infinite;
-            will-change: box-shadow;
-        }
-        
-        /* Canvas positioning */
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        
-        #hearts-canvas, #hearts-canvas2 {
-            opacity: 1 !important;
-            display: block !important;
-        }
-        
-        /* Animations with reduced complexity for mobile */
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(232, 84, 128, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0); }
-        }
-        
-        /* iOS-specific fixes */
-        input, button {
-            -webkit-appearance: none;
-            border-radius: 0;
-        }
-        
-        /* Prevent text selection */
-        .no-select {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
+        @media (min-width: 768px) {
+            .signature {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- First page with love message -->
     <div class="page active" id="page1">
-        <canvas id="hearts-canvas" style="display: block; opacity: 1;"></canvas>
+        <canvas id="hearts-canvas"></canvas>
         <div class="container">
             <div class="border"></div>
-            <div class="heart no-select">❤️</div>
-            <div class="spanish-phrase no-select">"Sin ti no sé vivir"</div>
-            <div class="date no-select">March 8th, 2025</div>
-            <div class="love-message no-select">Te amo mi niña</div>
-            <div class="heart no-select">❤️</div>
-            <div class="signature no-select">- Anthony</div>
-            <button class="button no-select" onclick="showPage('page2')">
+            <div class="heart">❤️</div>
+            <div class="spanish-phrase">"Sin ti no sé vivir"</div>
+            <div class="date">March 8th, 2025</div>
+            <div class="love-message">Te amo mi niña</div>
+            <div class="heart">❤️</div>
+            <div class="signature">- Anthony</div>
+            <button class="button" onclick="showPage('page2')">
                 See how long we've been together
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
             <div class="music-controls">
-                <button id="play-music" class="music-button no-select" onclick="toggleMusic()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button id="play-music" class="music-button" onclick="toggleMusic()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
                         <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
@@ -379,112 +403,78 @@
                 </button>
             </div>
         </div>
-        <!-- Audio element - using preloaded attribute to load faster -->
         <audio id="background-music" preload="auto" loop>
             <source src="te quiero tanto 4.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
 
-    <!-- Second page with timer -->
     <div class="page" id="page2">
-        <canvas id="hearts-canvas2" style="display: block; opacity: 1;"></canvas>
+        <canvas id="hearts-canvas2"></canvas>
         <div class="timer-page">
-            <div class="timer-text no-select">We've been together for:</div>
+            <div class="timer-text">We've been together for:</div>
             <div class="timer-container">
                 <div class="timer-box">
-                    <div class="timer-value no-select" id="days">0</div>
-                    <div class="timer-label no-select">Days</div>
+                    <div class="timer-value" id="days">0</div>
+                    <div class="timer-label">Days</div>
                 </div>
-                <div class="timer-separator no-select">:</div>
+                <div class="timer-separator">:</div>
                 <div class="timer-box">
-                    <div class="timer-value no-select" id="hours">0</div>
-                    <div class="timer-label no-select">Hours</div>
+                    <div class="timer-value" id="hours">0</div>
+                    <div class="timer-label">Hours</div>
                 </div>
-                <div class="timer-separator no-select">:</div>
+                <div class="timer-separator">:</div>
                 <div class="timer-box">
-                    <div class="timer-value no-select" id="minutes">0</div>
-                    <div class="timer-label no-select">Minutes</div>
+                    <div class="timer-value" id="minutes">0</div>
+                    <div class="timer-label">Minutes</div>
                 </div>
-                <div class="timer-separator no-select">:</div>
+                <div class="timer-separator">:</div>
                 <div class="timer-box">
-                    <div class="timer-value no-select" id="seconds">0</div>
-                    <div class="timer-label no-select">Seconds</div>
+                    <div class="timer-value" id="seconds">0</div>
+                    <div class="timer-label">Seconds</div>
                 </div>
             </div>
-            <div class="timer-caption no-select">... and forever counting <span class="red-heart">❤️</span></div>
+            <div class="timer-caption">... and forever counting <span class="red-heart">❤️</span></div>
             
-            <button class="back-button no-select" onclick="showPage('page1')">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button class="back-button" onclick="showPage('page1')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 Back
             </button>
-            <div class="signature no-select" style="margin-top: 20px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
         </div>
     </div>
 
     <script>
-        // Load high-priority elements first
-        document.addEventListener('DOMContentLoaded', function() {
-            // iOS Safari fixes
-            document.addEventListener('gesturestart', function(e) {
-                e.preventDefault(); // Disable pinch zoom
-            });
-            
-            // Prevent bounce effect on iOS Safari
-            document.body.addEventListener('touchmove', function(e) {
-                if (e.target === document.body) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // Initialize timer immediately
-            updateTimer();
-            
-            // Setup hearts immediately for better visual effect
-            setupHearts('hearts-canvas');
-            setupHearts('hearts-canvas2');
-            
-            // Force redraw canvases (iOS Safari sometimes needs this)
-            document.getElementById('hearts-canvas').style.display = 'block';
-            document.getElementById('hearts-canvas2').style.display = 'block';
-            
-            // Pre-load audio to avoid delay
-            const audio = document.getElementById('background-music');
-            audio.load();
-        });
-
-        // Function to switch pages with a fast transition
+        // Prevent default touch behavior to improve responsiveness
+        document.addEventListener('touchstart', function(event) {
+            if(event.target.nodeName !== 'INPUT' && event.target.nodeName !== 'TEXTAREA') {
+                event.preventDefault();
+            }
+        }, { passive: false });
+        
+        // Function to show specific page
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             document.getElementById(pageId).classList.add('active');
             
-            // Ensure both canvases remain visible
-            document.getElementById('hearts-canvas').style.display = 'block';
-            document.getElementById('hearts-canvas2').style.display = 'block';
-            
-            // Reset scroll position when switching pages
+            // Force layout recalculation for Safari
             window.scrollTo(0, 0);
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 10);
         }
 
-        // Timer function optimized for performance
-        let lastUpdateTime = 0;
-        const startDate = new Date(2025, 2, 8); // March 8th, 2025
-        
+        // Setup the relationship timer
         function updateTimer() {
+            // Set the date we're counting from (March 8th, 2025)
+            const startDate = new Date(2025, 2, 8); // Month is 0-based, so 2 = March
+            
             // Get current date and time
             const now = new Date();
-            
-            // Only update UI once per second for efficiency
-            if (now - lastUpdateTime < 1000) {
-                requestAnimationFrame(updateTimer);
-                return;
-            }
-            
-            lastUpdateTime = now;
             
             // Calculate time difference
             let timeDiff = now - startDate;
@@ -492,10 +482,9 @@
             // If current date is before start date, show zeros
             if (timeDiff < 0) {
                 document.getElementById('days').textContent = '0';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                requestAnimationFrame(updateTimer);
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
                 return;
             }
             
@@ -511,43 +500,85 @@
             
             const seconds = Math.floor(timeDiff / 1000);
             
-            // Update the display efficiently
+            // Update the display
             document.getElementById('days').textContent = days;
             document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
             document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
             document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-            
-            // Continue animation loop
-            requestAnimationFrame(updateTimer);
         }
         
-        // Optimized floating hearts animation
+        // Initialize audio for iOS
+        function initAudio() {
+            const audio = document.getElementById('background-music');
+            audio.load(); // Force preload
+            
+            // Create silent audio context to unlock audio
+            document.addEventListener('touchstart', function() {
+                // Create context for iOS
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const audioContext = new AudioContext();
+                    
+                    // Create and play a short silent buffer
+                    const buffer = audioContext.createBuffer(1, 1, 22050);
+                    const source = audioContext.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(audioContext.destination);
+                    source.start(0);
+                    
+                    // Resume audio context if suspended
+                    if (audioContext.state === 'suspended') {
+                        audioContext.resume();
+                    }
+                }
+                
+                // Only need to do this once
+                document.removeEventListener('touchstart', initAudio);
+            }, { once: true });
+        }
+        
+        // Update the timer every second
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Initial update
+        
+        // Initialize audio
+        initAudio();
+
+        // Setup floating hearts background with reduced intensity for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            // Run hearts effect for first page
+            setupHearts('hearts-canvas');
+            
+            // Run hearts effect for second page
+            setupHearts('hearts-canvas2');
+        });
+        
         function setupHearts(canvasId) {
             const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
+            if (!canvas) return; // Skip if no canvas
             
-            // Make sure canvas is visible
-            canvas.style.display = 'block';
-            canvas.style.opacity = '1';
+            const ctx = canvas.getContext('2d');
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             
-            const ctx = canvas.getContext('2d', { alpha: true });
+            // Set canvas dimensions and adjust for device pixel ratio
+            function resizeCanvas() {
+                const pixelRatio = window.devicePixelRatio || 1;
+                canvas.width = window.innerWidth * pixelRatio;
+                canvas.height = window.innerHeight * pixelRatio;
+                canvas.style.width = window.innerWidth + 'px';
+                canvas.style.height = window.innerHeight + 'px';
+                ctx.scale(pixelRatio, pixelRatio);
+            }
             
-            // Properly size canvas with device pixel ratio for sharp rendering
-            const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
+            resizeCanvas();
             
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            canvas.style.width = rect.width + 'px';
-            canvas.style.height = rect.height + 'px';
-            
-            ctx.scale(dpr, dpr);
-            
-            const hearts = [];
+            let hearts = [];
             const colors = ['#ffb6c1', '#e75480', '#ff4d6d', '#ff1a4b'];
-            let animating = true;
             
-            // Draw heart shape efficiently
+            // Reduce the number of hearts for mobile
+            const maxHearts = isMobile ? 15 : 30;
+            const heartCreationDelay = isMobile ? 1200 : 800;
+            
             function drawHeart(x, y, size, color) {
                 ctx.fillStyle = color;
                 ctx.globalAlpha = 1;
@@ -578,21 +609,19 @@
                 ctx.fill();
             }
 
-            // Create fewer hearts for better performance
             function createHeart() {
-                if (!animating) return;
+                // Limit the maximum number of hearts
+                if (hearts.length >= maxHearts) return;
                 
-                // Limit the total number of hearts for performance
-                if (hearts.length > 30) return;
-                
-                const x = Math.random() * rect.width;
-                const y = rect.height + 40;
-                const size = Math.random() * 10 + 8; // Smaller hearts
-                const speed = Math.random() * 0.8 + 0.4; // Slower movement
+                const x = Math.random() * window.innerWidth;
+                const y = window.innerHeight + 50;
+                const size = Math.random() * 15 + 10;
+                // Slower speed for better performance
+                const speed = Math.random() * 0.8 + 0.3;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 const opacity = Math.random() * 0.5 + 0.3;
-                const wobbleSpeed = Math.random() * 0.02 + 0.01; // Less wobble
-                const wobbleSize = Math.random() * 15 + 5; // Smaller wobble range
+                const wobbleSpeed = Math.random() * 0.02 + 0.01;
+                const wobbleSize = Math.random() * 20 + 5;
                 
                 hearts.push({
                     x: x,
@@ -607,27 +636,21 @@
                     angle: 0
                 });
                 
-                // Schedule next heart creation with shorter intervals for more hearts
-                setTimeout(createHeart, Math.random() * 800 + 200);
+                // Schedule next heart creation with a limit
+                setTimeout(createHeart, Math.random() * heartCreationDelay + 300);
             }
 
-            // Optimized animation loop with RAF
             let lastTime = 0;
+            const fpsLimit = isMobile ? 30 : 60; // Lower FPS for mobile
+            
             function animate(timestamp) {
-                if (!animating) return;
-                
                 requestAnimationFrame(animate);
                 
-                // Throttle to ~30fps for better performance on mobile
-                if (timestamp - lastTime < 33) return;
+                // FPS throttling
+                if (timestamp - lastTime < 1000 / fpsLimit) return;
                 lastTime = timestamp;
                 
-                ctx.clearRect(0, 0, rect.width, rect.height);
-
-                // Make sure we have enough hearts
-                if (hearts.length < 15 && Math.random() < 0.1) {
-                    createHeart();
-                }
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
                 for (let i = 0; i < hearts.length; i++) {
                     const h = hearts[i];
@@ -638,7 +661,7 @@
                     h.x = h.origX + Math.sin(h.angle) * h.wobbleSize;
                     
                     // Remove hearts that have gone off screen
-                    if (h.y < -30) {
+                    if (h.y < -50) {
                         hearts.splice(i, 1);
                         i--;
                         continue;
@@ -654,19 +677,20 @@
             animate();
             createHeart();
             
-            // Create fewer initial hearts
-            for (let i = 0; i < 5; i++) {
+            // Create initial set of hearts - fewer for mobile
+            const initialHearts = isMobile ? 5 : 10;
+            for (let i = 0; i < initialHearts; i++) {
                 setTimeout(() => {
-                    if (!animating) return;
+                    if (hearts.length >= maxHearts) return;
                     
-                    const x = Math.random() * rect.width;
-                    const y = Math.random() * rect.height;
-                    const size = Math.random() * 10 + 8;
-                    const speed = Math.random() * 0.8 + 0.4;
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    const size = Math.random() * 15 + 10;
+                    const speed = Math.random() * 0.8 + 0.3;
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     const opacity = Math.random() * 0.5 + 0.3;
                     const wobbleSpeed = Math.random() * 0.02 + 0.01;
-                    const wobbleSize = Math.random() * 15 + 5;
+                    const wobbleSize = Math.random() * 20 + 5;
                     
                     hearts.push({
                         x: x,
@@ -680,89 +704,80 @@
                         wobbleSize: wobbleSize,
                         angle: 0
                     });
-                }, i * 400);
+                }, i * 300);
             }
             
-            // Proper visibility handling
-            document.addEventListener('visibilitychange', function() {
-                animating = !document.hidden;
-                
-                if (animating) {
-                    lastTime = 0;
-                    animate();
-                    createHeart();
-                }
-            });
-            
-            // Efficient resize handling with debounce
+            // Handle window resize properly
             let resizeTimeout;
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(function() {
-                    const rect = canvas.getBoundingClientRect();
-                    canvas.width = rect.width * dpr;
-                    canvas.height = rect.height * dpr;
-                    canvas.style.width = rect.width + 'px';
-                    canvas.style.height = rect.height + 'px';
-                    ctx.scale(dpr, dpr);
-                }, 250);
+                    resizeCanvas();
+                }, 100);
+            });
+            
+            // Handle orientation change
+            window.addEventListener('orientationchange', function() {
+                setTimeout(resizeCanvas, 300);
             });
         }
 
-        // Audio control optimized for iOS
-        let audioInitialized = false;
-        
         function toggleMusic() {
             const audio = document.getElementById('background-music');
             const button = document.getElementById('play-music');
             
-            if (!audioInitialized) {
-                // iOS requires user interaction to start audio
-                audio.play().then(() => {
-                    audioInitialized = true;
-                    updateMusicButton(button, false);
-                }).catch(error => {
-                    console.log('Audio play failed:', error);
-                    // Show "Play" button if auto-play failed
-                    updateMusicButton(button, true);
-                });
-            } else if (audio.paused) {
-                audio.play().then(() => {
-                    updateMusicButton(button, false);
-                }).catch(error => {
-                    console.log('Audio play failed:', error);
-                });
+            // Special handling for iOS
+            if (audio.paused) {
+                // iOS requires user interaction to play audio
+                const playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        // Audio is playing
+                        button.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="4" width="4" height="16"/>
+                                <rect x="14" y="4" width="4" height="16"/>
+                            </svg>
+                            Pause music
+                        `;
+                    }).catch(function(error) {
+                        // Auto-play was prevented
+                        console.log("Audio play was prevented:", error);
+                        
+                        // Try again after a small delay
+                        setTimeout(function() {
+                            audio.play().catch(function(e) {
+                                console.log("Second attempt failed:", e);
+                            });
+                        }, 100);
+                    });
+                }
             } else {
                 audio.pause();
-                updateMusicButton(button, true);
-            }
-        }
-        
-        function updateMusicButton(button, isPaused) {
-            if (isPaused) {
                 button.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
                         <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
                     </svg>
                     Play our song
                 `;
-            } else {
-                button.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="6" y="4" width="4" height="16"/>
-                        <rect x="14" y="4" width="4" height="16"/>
-                    </svg>
-                    Pause music
-                `;
             }
         }
+
+        // Fix for scroll bounce in iOS
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
         
-        // Handle iOS specific issues
-        document.addEventListener('touchstart', function() {
-            // iOS sometimes requires a touch event to properly interact with the page
-        }, false);
+        // Fix for touch delay
+        document.addEventListener('DOMContentLoaded', function() {
+            FastClick.attach(document.body);
+        });
     </script>
+    
+    <!-- Add FastClick to eliminate touch delay -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 </body>
 </html>
