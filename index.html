@@ -1,10 +1,78 @@
-<!DOCTYPE html>
+/* Mobile-specific adjustments */
+        @media (max-width: 767px) {
+            .spanish-phrase {
+                font-size: 24px;
+                margin: 15px 0;
+            }
+            .love-message {
+                font-size: 20px;
+                margin: 15px 0;
+            }
+            .date {
+                font-size: 30px;
+                margin: 20px 0;
+            }
+            .heart {
+                font-size: 40px;
+                margin: 8px 0;
+            }
+            .button {
+                padding: 12px 20px;
+                font-size: 14px;
+                margin-top: 12px;
+            }
+            .signature {
+                font-size: 24px;
+                margin-top: 10px;
+            }
+            .timer-text {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+            .timer-box {
+                width: 60px;
+                height: 60px;
+                padding: 8px;
+            }
+            .timer-value {
+                font-size: 28px;
+            }
+            .timer-label {
+                font-size: 12px;
+            }
+            .timer-separator {
+                font-size: 28px;
+            }
+            .password-title {
+                font-size: 24px;
+            }
+            .password-heart {
+                font-size: 40px;
+            }
+            .password-input {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .password-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .page {
+                min-height: 100%;
+                padding: 20px 0;
+            }
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Nuestro Amor</title>
     <style>
+        html {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #ffccd5;
@@ -13,11 +81,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Changed from center to flex-start to allow scrolling */
             min-height: 100vh;
             text-align: center;
             color: #333;
-            overflow: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: auto; /* Allow vertical scroll */
         }
         .container {
             width: 90%;
@@ -170,6 +239,9 @@
             width: 100%;
             min-height: 100vh;
             position: relative;
+            overflow-y: auto; /* Allow vertical scrolling */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            padding-bottom: 50px; /* Add some padding at the bottom */
         }
         .active {
             display: flex;
