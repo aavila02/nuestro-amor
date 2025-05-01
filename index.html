@@ -235,6 +235,91 @@
             margin: 0 2px;
         }
         
+        /* Password page styling */
+        .password-container {
+            width: 90%;
+            max-width: 400px;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s forwards;
+        }
+        .password-title {
+            color: #e75480;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .password-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border: 2px solid #ffccd5;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .password-input:focus {
+            border-color: #e75480;
+            box-shadow: 0 0 8px rgba(231, 84, 128, 0.3);
+        }
+        .password-input::placeholder {
+            color: #ccc;
+        }
+        .password-error {
+            color: #e75480;
+            margin: 10px 0;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .password-error.visible {
+            opacity: 1;
+        }
+        .password-button {
+            padding: 12px 30px;
+            background-color: #e75480;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .password-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .password-heart {
+            font-size: 50px;
+            color: #e75480;
+            margin: 15px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        
         /* Responsive adjustments */
         @media (min-width: 768px) {
             .timer-box {
@@ -253,6 +338,23 @@
             .timer-separator {
                 font-size: 60px;
                 margin: 0 5px;
+            }
+            .password-container {
+                padding: 40px;
+            }
+            .password-title {
+                font-size: 32px;
+            }
+            .password-input {
+                padding: 15px 20px;
+                font-size: 18px;
+            }
+            .password-button {
+                padding: 15px 40px;
+                font-size: 18px;
+            }
+            .password-heart {
+                font-size: 60px;
             }
         }
         .timer-caption {
@@ -325,7 +427,19 @@
     </style>
 </head>
 <body>
-    <div class="page active" id="page1">
+    <div class="page active" id="password-page">
+        <canvas id="hearts-canvas-pw"></canvas>
+        <div class="password-container">
+            <div class="border"></div>
+            <div class="password-heart">❤️</div>
+            <h2 class="password-title">Enter password</h2>
+            <input type="password" id="password-input" class="password-input" placeholder="Password" onkeypress="checkEnter(event)">
+            <div id="password-error" class="password-error">Incorrect password</div>
+            <button id="password-button" class="password-button" onclick="checkPassword()">Unlock</button>
+        </div>
+    </div>
+
+    <div class="page" id="page1">
         <canvas id="hearts-canvas"></canvas>
         <div class="container">
             <div class="border"></div>
@@ -363,6 +477,11 @@
         <div class="timer-page">
             <div class="timer-text">We've been together for:</div>
             <div class="timer-container">
+                <div class="timer-box">
+                    <div class="timer-value" id="months">0</div>
+                    <div class="timer-label">Months</div>
+                </div>
+                <div class="timer-separator">:</div>
                 <div class="timer-box">
                     <div class="timer-value" id="days">0</div>
                     <div class="timer-label">Days</div>
@@ -403,6 +522,40 @@
             });
             document.getElementById(pageId).classList.add('active');
         }
+        
+        // Password validation
+        function checkPassword() {
+            const password = document.getElementById('password-input').value;
+            const correctPassword = "ariadne123"; // Set your password here
+            const errorElement = document.getElementById('password-error');
+            const container = document.querySelector('.password-container');
+            
+            if (password === correctPassword) {
+                // Password is correct, show the main page
+                showPage('page1');
+                // Save authentication state for this session
+                sessionStorage.setItem('authenticated', 'true');
+                // Reset the password field for next time
+                document.getElementById('password-input').value = '';
+                errorElement.classList.remove('visible');
+            } else {
+                // Password is incorrect, show error and shake effect
+                errorElement.classList.add('visible');
+                container.classList.add('shake');
+                
+                // Remove shake class after animation completes
+                setTimeout(() => {
+                    container.classList.remove('shake');
+                }, 500);
+            }
+        }
+        
+        // Allow pressing Enter key to submit password
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
 
         // Setup the relationship timer
         function updateTimer() {
@@ -417,6 +570,7 @@
             
             // If current date is before start date, show zeros
             if (timeDiff < 0) {
+                document.getElementById('months').textContent = '0';
                 document.getElementById('days').textContent = '0';
                 document.getElementById('hours').textContent = '0';
                 document.getElementById('minutes').textContent = '0';
@@ -424,19 +578,26 @@
                 return;
             }
             
-            // Calculate time components
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            timeDiff -= days * (1000 * 60 * 60 * 24);
+            // Calculate months (approximate, using 30.44 days per month)
+            const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.44));
             
-            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-            timeDiff -= hours * (1000 * 60 * 60);
+            // Calculate remaining days after removing full months
+            const days = Math.floor((timeDiff - months * 1000 * 60 * 60 * 24 * 30.44) / (1000 * 60 * 60 * 24));
             
-            const minutes = Math.floor(timeDiff / (1000 * 60));
-            timeDiff -= minutes * (1000 * 60);
+            // Calculate hours
+            let remainingTime = timeDiff - months * 1000 * 60 * 60 * 24 * 30.44 - days * 1000 * 60 * 60 * 24;
+            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
             
-            const seconds = Math.floor(timeDiff / 1000);
+            // Calculate minutes
+            remainingTime -= hours * (1000 * 60 * 60);
+            const minutes = Math.floor(remainingTime / (1000 * 60));
+            
+            // Calculate seconds
+            remainingTime -= minutes * (1000 * 60);
+            const seconds = Math.floor(remainingTime / 1000);
             
             // Update the display
+            document.getElementById('months').textContent = months;
             document.getElementById('days').textContent = days;
             document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
             document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
@@ -449,11 +610,16 @@
 
         // Setup floating hearts background
         document.addEventListener('DOMContentLoaded', function() {
-            // Run hearts effect for first page
+            // Run hearts effect for all pages
+            setupHearts('hearts-canvas-pw');
             setupHearts('hearts-canvas');
-            
-            // Run hearts effect for second page
             setupHearts('hearts-canvas2');
+            
+            // Check if user has already authenticated in this session
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            if (isAuthenticated === 'true') {
+                showPage('page1');
+            }
         });
         
         function setupHearts(canvasId) {
