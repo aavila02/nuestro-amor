@@ -409,6 +409,14 @@
         .music-button svg {
             transition: all 0.3s ease;
         }
+        /* Concert button styling */
+        .concert-button {
+            background-color: #8f4068;
+            margin-top: 15px;
+        }
+        .concert-button:hover {
+            background-color: #a3507a;
+        }
         /* Signature styling */
         .signature {
             font-family: 'Brush Script MT', cursive;
@@ -451,6 +459,12 @@
             <div class="signature">- Anthony</div>
             <button class="button" onclick="showPage('page2')">
                 See how long we've been together
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="button concert-button" onclick="showPage('concert-page')">
+                Days until Kevin Kaarl Concert
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -503,6 +517,43 @@
                 </div>
             </div>
             <div class="timer-caption">... and forever counting <span class="red-heart">❤️</span></div>
+            
+            <button class="back-button" onclick="showPage('page1')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+        </div>
+    </div>
+
+    <div class="page" id="concert-page">
+        <canvas id="hearts-canvas3"></canvas>
+        <div class="timer-page">
+            <div class="timer-text">Days until Kevin Kaarl Concert:</div>
+            <div class="timer-container concert-timer">
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-days">0</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-hours">0</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-minutes">0</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-seconds">0</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+            <div class="timer-caption">Can't wait to experience it with you <span class="red-heart">❤️</span></div>
             
             <button class="back-button" onclick="showPage('page1')">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
