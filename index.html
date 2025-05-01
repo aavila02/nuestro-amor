@@ -1,520 +1,13 @@
-/* Mobile-specific adjustments */
-        @media (max-width: 767px) {
-            .spanish-phrase {
-                font-size: 24px;
-                margin: 15px 0;
-            }
-            .love-message {
-                font-size: 20px;
-                margin: 15px 0;
-            }
-            .date {
-                font-size: 30px;
-                margin: 20px 0;
-            }
-            .heart {
-                font-size: 40px;
-                margin: 8px 0;
-            }
-            .button {
-                padding: 12px 20px;
-                font-size: 14px;
-                margin-top: 12px;
-            }
-            .signature {
-                font-size: 24px;
-                margin-top: 10px;
-            }
-            .timer-text {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
-            .timer-box {
-                width: 60px;
-                height: 60px;
-                padding: 8px;
-            }
-            .timer-value {
-                font-size: 28px;
-            }
-            .timer-label {
-                font-size: 12px;
-            }
-            .timer-separator {
-                font-size: 28px;
-            }
-            .password-title {
-                font-size: 24px;
-            }
-            .password-heart {
-                font-size: 40px;
-            }
-            .password-input {
-                padding: 10px;
-                font-size: 14px;
-            }
-            .password-button {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-            .page {
-                min-height: 100%;
-                padding: 20px 0;
-            }
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Nuestro Amor</title>
-    <style>
-        html {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffccd5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Changed from center to flex-start to allow scrolling */
-            min-height: 100vh;
-            text-align: center;
-            color: #333;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            overflow-y: auto; /* Allow vertical scroll */
-        }
-        .container {
-            width: 90%;
-            max-width: 600px;
-            padding: 30px 20px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 15px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        h1 {
-            color: #e75480;
-            margin-bottom: 15px;
-            font-size: 32px;
-            animation: fadeIn 2s forwards;
-        }
-        .spanish-phrase {
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            margin: 20px 0;
-            font-style: italic;
-            animation: fadeIn 2.5s forwards;
-            text-align: center;
-            line-height: 1.3;
-        }
-        .love-message {
-            font-size: 24px;
-            color: #e75480;
-            margin: 20px 0;
-            animation: fadeIn 3s forwards;
-            text-align: center;
-        }
-        .date {
-            font-size: 36px;
-            font-weight: bold;
-            color: #e75480;
-            margin: 25px 0;
-            animation: pulse 3s infinite;
-            text-align: center;
-        }
-        .heart {
-            font-size: 60px;
-            color: #e75480;
-            margin: 10px 0;
-            animation: heartbeat 1.5s infinite;
-        }
-        .button {
-            display: inline-block;
-            padding: 15px 25px;
-            background-color: #e75480;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            white-space: nowrap;
-            text-align: center;
-            width: auto;
-            max-width: 90%;
-        }
-        
-        /* Responsive adjustments for larger screens */
-        @media (min-width: 768px) {
-            .container {
-                padding: 40px;
-            }
-            .spanish-phrase {
-                font-size: 32px;
-                margin: 25px 0;
-            }
-            .love-message {
-                font-size: 28px;
-                margin: 25px 0;
-            }
-            .date {
-                font-size: 42px;
-                margin: 30px 0;
-            }
-            .heart {
-                font-size: 80px;
-            }
-            .button {
-                padding: 15px 30px;
-                font-size: 18px;
-                margin-top: 30px;
-            }
-        }
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        .button svg {
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        @keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 2px solid #f8a5c2;
-            border-radius: 15px;
-            pointer-events: none;
-            z-index: -1;
-            animation: borderPulse 4s infinite;
-        }
-        @keyframes borderPulse {
-            0% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(232, 84, 128, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(232, 84, 128, 0); }
-        }
-        .page {
-            display: none;
-            width: 100%;
-            min-height: 100vh;
-            position: relative;
-            overflow-y: auto; /* Allow vertical scrolling */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            padding-bottom: 50px; /* Add some padding at the bottom */
-        }
-        .active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Timer page styling - updated to match screenshot */
-        .timer-page {
-            background-color: #ffccd5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            width: 100%;
-        }
-        .timer-text {
-            font-size: 36px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin-bottom: 60px;
-            font-weight: bold;
-        }
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            max-width: 100%;
-            padding: 0 10px;
-        }
-        .timer-box {
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 10px;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 5px;
-        }
-        .timer-value {
-            font-size: 40px;
-            font-weight: bold;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-        .timer-label {
-            font-size: 16px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin-top: 5px;
-        }
-        .timer-separator {
-            font-size: 40px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            margin: 0 2px;
-        }
-        
-        /* Password page styling */
-        .password-container {
-            width: 90%;
-            max-width: 400px;
-            padding: 30px 20px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 15px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 1s forwards;
-        }
-        .password-title {
-            color: #e75480;
-            font-size: 28px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .password-input {
-            width: 100%;
-            max-width: 300px;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border: 2px solid #ffccd5;
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .password-input:focus {
-            border-color: #e75480;
-            box-shadow: 0 0 8px rgba(231, 84, 128, 0.3);
-        }
-        .password-input::placeholder {
-            color: #ccc;
-        }
-        .password-error {
-            color: #e75480;
-            margin: 10px 0;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .password-error.visible {
-            opacity: 1;
-        }
-        .password-button {
-            padding: 12px 30px;
-            background-color: #e75480;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .password-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        .password-heart {
-            font-size: 50px;
-            color: #e75480;
-            margin: 15px 0;
-            animation: heartbeat 1.5s infinite;
-        }
-        .shake {
-            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-        }
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-        
-        /* Responsive adjustments */
-        @media (min-width: 768px) {
-            .timer-box {
-                width: 120px;
-                height: 120px;
-                padding: 20px;
-                margin: 0 10px;
-            }
-            .timer-value {
-                font-size: 60px;
-            }
-            .timer-label {
-                font-size: 22px;
-                margin-top: 10px;
-            }
-            .timer-separator {
-                font-size: 60px;
-                margin: 0 5px;
-            }
-            .password-container {
-                padding: 40px;
-            }
-            .password-title {
-                font-size: 32px;
-            }
-            .password-input {
-                padding: 15px 20px;
-                font-size: 18px;
-            }
-            .password-button {
-                padding: 15px 40px;
-                font-size: 18px;
-            }
-            .password-heart {
-                font-size: 60px;
-            }
-        }
-        .timer-caption {
-            font-size: 24px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-            margin: 20px 0 60px 0;
-            font-style: italic;
-        }
-        .red-heart {
-            color: #ff2442;
-            font-size: 28px;
-            animation: heartbeat 1.5s infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-        .back-button {
-            background-color: #e75480;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .music-controls {
-            margin-top: 15px;
-            opacity: 0.8;
-        }
-        .music-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background-color: rgba(231, 84, 128, 0.2);
-            color: #e75480;
-            border: 1px solid #e75480;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        .music-button:hover {
-            background-color: rgba(231, 84, 128, 0.3);
-        }
-        .music-button svg {
-            transition: all 0.3s ease;
-        }
-        /* Concert button styling */
-        .concert-button {
-            background-color: #8f4068;
-            margin-top: 15px;
-        }
-        .concert-button:hover {
-            background-color: #a3507a;
-        }
-        /* Return button styling */
-        .return-button {
-            background-color: #4069b9;
-            margin-top: 15px;
-        }
-        .return-button:hover {
-            background-color: #5078c8;
-        }
-        /* Signature styling */
-        .signature {
-            font-family: 'Brush Script MT', cursive;
-            font-size: 28px;
-            color: #e75480;
-            margin-top: 15px;
-            text-align: right;
-            width: 100%;
-            animation: fadeIn 3.5s forwards;
-        }
-        @media (min-width: 768px) {
-            .signature {
-                font-size: 36px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Password Page -->
     <div class="page active" id="password-page">
         <canvas id="hearts-canvas-pw"></canvas>
         <div class="password-container">
@@ -527,6 +20,7 @@
         </div>
     </div>
 
+    <!-- Main Page -->
     <div class="page" id="page1">
         <canvas id="hearts-canvas"></canvas>
         <div class="container">
@@ -572,6 +66,83 @@
         </audio>
     </div>
 
+    <!-- Return Countdown Page -->
+    <div class="page" id="return-page">
+        <canvas id="hearts-canvas4"></canvas>
+        <div class="timer-page">
+            <div class="timer-text">Days until I am back:</div>
+            <div class="timer-container return-timer">
+                <div class="timer-box">
+                    <div class="timer-value" id="return-days">0</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="return-hours">0</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="return-minutes">0</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="return-seconds">0</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+            <div class="timer-caption">I miss you <span class="red-heart">❤️</span></div>
+            
+            <button class="back-button" onclick="showPage('page1')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+        </div>
+    </div>
+
+    <!-- Concert Countdown Page -->
+    <div class="page" id="concert-page">
+        <canvas id="hearts-canvas3"></canvas>
+        <div class="timer-page">
+            <div class="timer-text">Days until Kevin Kaarl Concert:</div>
+            <div class="timer-container concert-timer">
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-days">0</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-hours">0</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-minutes">0</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="concert-seconds">0</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+            <div class="timer-caption">Can't wait to experience it with you <span class="red-heart">❤️</span></div>
+            
+            <button class="back-button" onclick="showPage('page1')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+        </div>
+    </div>
+
+    <!-- Relationship Timer Page -->
     <div class="page" id="page2">
         <canvas id="hearts-canvas2"></canvas>
         <div class="timer-page">
@@ -614,440 +185,7 @@
         </div>
     </div>
 
-    <div class="page" id="return-page">
-        <canvas id="hearts-canvas4"></canvas>
-        <div class="timer-page">
-            <div class="timer-text">Days until I am back:</div>
-            <div class="timer-container return-timer">
-                <div class="timer-box">
-                    <div class="timer-value" id="return-days">0</div>
-                    <div class="timer-label">Days</div>
-                </div>
-                <div class="timer-separator">:</div>
-                <div class="timer-box">
-                    <div class="timer-value" id="return-hours">0</div>
-                    <div class="timer-label">Hours</div>
-                </div>
-                <div class="timer-separator">:</div>
-                <div class="timer-box">
-                    <div class="timer-value" id="return-minutes">0</div>
-                    <div class="timer-label">Minutes</div>
-                </div>
-                <div class="timer-separator">:</div>
-                <div class="timer-box">
-                    <div class="timer-value" id="return-seconds">0</div>
-                    <div class="timer-label">Seconds</div>
-                </div>
-            </div>
-            <div class="timer-caption">I miss you <span class="red-heart">❤️</span></div>
-            
-            <button class="back-button" onclick="showPage('page1')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Back
-            </button>
-            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
-        </div>
-    </div>
-
-    <div class="page" id="concert-page">
-        <canvas id="hearts-canvas3"></canvas>
-        <div class="timer-page">
-            <div class="timer-text">Days until Kevin Kaarl Concert:</div>
-            <div class="timer-container concert-timer">
-                <div class="timer-box">
-                    <div class="timer-value" id="concert-days">0</div>
-                    <div class="timer-label">Days</div>
-                </div>
-                <div class="timer-separator">:</div>
-                <div class="timer-box">
-                    <div class="timer-value" id="concert-hours">0</div>
-                    <div class="timer-label">Hours</div>
-                </div>
-                <div class="timer-separator">:</div>
-                <div class="timer-box">
-                    <div class="timer-value" id="concert-minutes">0</div>
-                    <div class="timer-label">Minutes</div>
-                </div>
-                <div class="timer-separator">:</div>
-                <div class="timer-box">
-                    <div class="timer-value" id="concert-seconds">0</div>
-                    <div class="timer-label">Seconds</div>
-                </div>
-            </div>
-            <div class="timer-caption">Can't wait to experience it with you <span class="red-heart">❤️</span></div>
-            
-            <button class="back-button" onclick="showPage('page1')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Back
-            </button>
-            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
-        </div>
-    </div>
-
-    <script>
-        // Function to show specific page
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-        }
-        
-        // Password validation
-        function checkPassword() {
-            const password = document.getElementById('password-input').value;
-            const correctPassword = "ariadne123"; // Set your password here
-            const errorElement = document.getElementById('password-error');
-            const container = document.querySelector('.password-container');
-            
-            if (password === correctPassword) {
-                // Password is correct, show the main page
-                showPage('page1');
-                // Save authentication state for this session
-                sessionStorage.setItem('authenticated', 'true');
-                // Reset the password field for next time
-                document.getElementById('password-input').value = '';
-                errorElement.classList.remove('visible');
-            } else {
-                // Password is incorrect, show error and shake effect
-                errorElement.classList.add('visible');
-                container.classList.add('shake');
-                
-                // Remove shake class after animation completes
-                setTimeout(() => {
-                    container.classList.remove('shake');
-                }, 500);
-            }
-        }
-        
-        // Allow pressing Enter key to submit password
-        function checkEnter(event) {
-            if (event.key === "Enter") {
-                checkPassword();
-            }
-        }
-
-        // Setup the relationship timer
-        function updateTimer() {
-            // Set the date we're counting from (March 8th, 2025)
-            const startDate = new Date(2025, 2, 8); // Month is 0-based, so 2 = March
-            
-            // Get current date and time
-            const now = new Date();
-            
-            // Calculate time difference
-            let timeDiff = now - startDate;
-            
-            // If current date is before start date, show zeros
-            if (timeDiff < 0) {
-                document.getElementById('months').textContent = '0';
-                document.getElementById('days').textContent = '0';
-                document.getElementById('hours').textContent = '0';
-                document.getElementById('minutes').textContent = '0';
-                document.getElementById('seconds').textContent = '0';
-                return;
-            }
-            
-            // Calculate months (approximate, using 30.44 days per month)
-            const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.44));
-            
-            // Calculate remaining days after removing full months
-            const days = Math.floor((timeDiff - months * 1000 * 60 * 60 * 24 * 30.44) / (1000 * 60 * 60 * 24));
-            
-            // Calculate hours
-            let remainingTime = timeDiff - months * 1000 * 60 * 60 * 24 * 30.44 - days * 1000 * 60 * 60 * 24;
-            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-            
-            // Calculate minutes
-            remainingTime -= hours * (1000 * 60 * 60);
-            const minutes = Math.floor(remainingTime / (1000 * 60));
-            
-            // Calculate seconds
-            remainingTime -= minutes * (1000 * 60);
-            const seconds = Math.floor(remainingTime / 1000);
-            
-            // Update the display
-            document.getElementById('months').textContent = months;
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-        }
-        
-        // Update the timer every second
-        setInterval(updateTimer, 1000);
-        updateTimer(); // Initial update
-        
-        // Kevin Kaarl Concert countdown timer
-        function updateConcertTimer() {
-            // Set the concert date to August 13th, 2025 at 8:00 PM
-            const concertDate = new Date(2025, 7, 13, 20, 0, 0); // August 13th, 2025 at 8:00 PM
-            
-            // Get current date and time
-            const now = new Date();
-            
-            // Calculate time difference
-            let timeDiff = concertDate - now;
-            
-            // If current date is past concert date, show zeros
-            if (timeDiff < 0) {
-                document.getElementById('concert-days').textContent = '0';
-                document.getElementById('concert-hours').textContent = '00';
-                document.getElementById('concert-minutes').textContent = '00';
-                document.getElementById('concert-seconds').textContent = '00';
-                return;
-            }
-            
-            // Calculate days
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            
-            // Calculate hours
-            let remainingTime = timeDiff - days * 1000 * 60 * 60 * 24;
-            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-            
-            // Calculate minutes
-            remainingTime -= hours * (1000 * 60 * 60);
-            const minutes = Math.floor(remainingTime / (1000 * 60));
-            
-            // Calculate seconds
-            remainingTime -= minutes * (1000 * 60);
-            const seconds = Math.floor(remainingTime / 1000);
-            
-            // Update the display
-            document.getElementById('concert-days').textContent = days;
-            document.getElementById('concert-hours').textContent = hours < 10 ? '0' + hours : hours;
-            document.getElementById('concert-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('concert-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-        }
-        
-        // Return date countdown timer
-        function updateReturnTimer() {
-            // Set the return date to August 10th, 2025 at 1:00 AM
-            const returnDate = new Date(2025, 7, 10, 1, 0, 0); // August 10th, 2025 at 1:00 AM
-            
-            // Get current date and time
-            const now = new Date();
-            
-            // Calculate time difference
-            let timeDiff = returnDate - now;
-            
-            // If current date is past return date, show zeros
-            if (timeDiff < 0) {
-                document.getElementById('return-days').textContent = '0';
-                document.getElementById('return-hours').textContent = '00';
-                document.getElementById('return-minutes').textContent = '00';
-                document.getElementById('return-seconds').textContent = '00';
-                return;
-            }
-            
-            // Calculate days
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            
-            // Calculate hours
-            let remainingTime = timeDiff - days * 1000 * 60 * 60 * 24;
-            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-            
-            // Calculate minutes
-            remainingTime -= hours * (1000 * 60 * 60);
-            const minutes = Math.floor(remainingTime / (1000 * 60));
-            
-            // Calculate seconds
-            remainingTime -= minutes * (1000 * 60);
-            const seconds = Math.floor(remainingTime / 1000);
-            
-            // Update the display
-            document.getElementById('return-days').textContent = days;
-            document.getElementById('return-hours').textContent = hours < 10 ? '0' + hours : hours;
-            document.getElementById('return-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('return-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-        }
-
-        // Setup floating hearts background
-        document.addEventListener('DOMContentLoaded', function() {
-            // Run hearts effect for all pages
-            setupHearts('hearts-canvas-pw');
-            setupHearts('hearts-canvas');
-            setupHearts('hearts-canvas2');
-            setupHearts('hearts-canvas3');
-            setupHearts('hearts-canvas4');
-            
-            // Check if user has already authenticated in this session
-            const isAuthenticated = sessionStorage.getItem('authenticated');
-            if (isAuthenticated === 'true') {
-                showPage('page1');
-            }
-            
-            // Initial update for all timers
-            updateTimer();
-            updateConcertTimer();
-            updateReturnTimer();
-            
-            // Set interval for timers
-            setInterval(updateTimer, 1000);
-            setInterval(updateConcertTimer, 1000);
-            setInterval(updateReturnTimer, 1000);
-        });
-        
-        function setupHearts(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return; // Skip if no canvas
-            
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            let hearts = [];
-            const colors = ['#ffb6c1', '#e75480', '#ff4d6d', '#ff1a4b'];
-            
-            function drawHeart(x, y, size, color) {
-                ctx.fillStyle = color;
-                ctx.globalAlpha = 1;
-                
-                ctx.beginPath();
-                ctx.moveTo(x, y + size * 0.25);
-                ctx.bezierCurveTo(
-                    x, y, 
-                    x - size * 0.5, y, 
-                    x - size * 0.5, y + size * 0.25
-                );
-                ctx.bezierCurveTo(
-                    x - size * 0.5, y + size * 0.4, 
-                    x, y + size * 0.7, 
-                    x, y + size * 0.8
-                );
-                ctx.bezierCurveTo(
-                    x, y + size * 0.7, 
-                    x + size * 0.5, y + size * 0.4, 
-                    x + size * 0.5, y + size * 0.25
-                );
-                ctx.bezierCurveTo(
-                    x + size * 0.5, y, 
-                    x, y, 
-                    x, y + size * 0.25
-                );
-                ctx.closePath();
-                ctx.fill();
-            }
-
-            function createHeart() {
-                const x = Math.random() * canvas.width;
-                const y = canvas.height + 50;
-                const size = Math.random() * 15 + 10;
-                const speed = Math.random() * 1 + 0.5;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const opacity = Math.random() * 0.5 + 0.3;
-                const wobbleSpeed = Math.random() * 0.03 + 0.01;
-                const wobbleSize = Math.random() * 25 + 5;
-                
-                hearts.push({
-                    x: x,
-                    y: y,
-                    origX: x,
-                    size: size,
-                    speed: speed,
-                    color: color,
-                    opacity: opacity,
-                    wobbleSpeed: wobbleSpeed,
-                    wobbleSize: wobbleSize,
-                    angle: 0
-                });
-                
-                // Schedule next heart creation
-                setTimeout(createHeart, Math.random() * 1000 + 300);
-            }
-
-            function animate() {
-                requestAnimationFrame(animate);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                for (let i = 0; i < hearts.length; i++) {
-                    const h = hearts[i];
-                    
-                    // Update position
-                    h.y -= h.speed;
-                    h.angle += h.wobbleSpeed;
-                    h.x = h.origX + Math.sin(h.angle) * h.wobbleSize;
-                    
-                    // Remove hearts that have gone off screen
-                    if (h.y < -50) {
-                        hearts.splice(i, 1);
-                        i--;
-                        continue;
-                    }
-                    
-                    // Draw the heart
-                    ctx.globalAlpha = h.opacity;
-                    drawHeart(h.x, h.y, h.size, h.color);
-                }
-            }
-
-            // Start animation and create first heart
-            animate();
-            createHeart();
-            
-            // Create initial set of hearts
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const x = Math.random() * canvas.width;
-                    const y = Math.random() * canvas.height;
-                    const size = Math.random() * 15 + 10;
-                    const speed = Math.random() * 1 + 0.5;
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const opacity = Math.random() * 0.5 + 0.3;
-                    const wobbleSpeed = Math.random() * 0.03 + 0.01;
-                    const wobbleSize = Math.random() * 25 + 5;
-                    
-                    hearts.push({
-                        x: x,
-                        y: y,
-                        origX: x,
-                        size: size,
-                        speed: speed,
-                        color: color,
-                        opacity: opacity,
-                        wobbleSpeed: wobbleSpeed,
-                        wobbleSize: wobbleSize,
-                        angle: 0
-                    });
-                }, i * 300);
-            }
-            
-            // Adjust for window resizing
-            window.addEventListener('resize', function() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-        }
-
-        function toggleMusic() {
-            const audio = document.getElementById('background-music');
-            const button = document.getElementById('play-music');
-            
-            if (audio.paused) {
-                audio.play();
-                button.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="6" y="4" width="4" height="16"/>
-                        <rect x="14" y="4" width="4" height="16"/>
-                    </svg>
-                    Pause music
-                `;
-            } else {
-                audio.pause();
-                button.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                    </svg>
-                    Play our song
-                `;
-            }
-        }
-    </script>
+    <!-- JavaScript link -->
+    <script src="script.js"></script>
 </body>
 </html>
