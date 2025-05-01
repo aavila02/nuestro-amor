@@ -417,6 +417,14 @@
         .concert-button:hover {
             background-color: #a3507a;
         }
+        /* Return button styling */
+        .return-button {
+            background-color: #4069b9;
+            margin-top: 15px;
+        }
+        .return-button:hover {
+            background-color: #5078c8;
+        }
         /* Signature styling */
         .signature {
             font-family: 'Brush Script MT', cursive;
@@ -469,6 +477,12 @@
                     <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
+            <button class="button return-button" onclick="showPage('return-page')">
+                Days until I am back
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
             <div class="music-controls">
                 <button id="play-music" class="music-button" onclick="toggleMusic()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -517,6 +531,43 @@
                 </div>
             </div>
             <div class="timer-caption">... and forever counting <span class="red-heart">❤️</span></div>
+            
+            <button class="back-button" onclick="showPage('page1')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+        </div>
+    </div>
+
+    <div class="page" id="return-page">
+        <canvas id="hearts-canvas4"></canvas>
+        <div class="timer-page">
+            <div class="timer-text">Days until I am back:</div>
+            <div class="timer-container return-timer">
+                <div class="timer-box">
+                    <div class="timer-value" id="return-days">0</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="return-hours">0</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="return-minutes">0</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-box">
+                    <div class="timer-value" id="return-seconds">0</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+            <div class="timer-caption">I miss you <span class="red-heart">❤️</span></div>
             
             <button class="back-button" onclick="showPage('page1')">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -658,6 +709,90 @@
         // Update the timer every second
         setInterval(updateTimer, 1000);
         updateTimer(); // Initial update
+        
+        // Kevin Kaarl Concert countdown timer
+        function updateConcertTimer() {
+            // Set the concert date to August 13th, 2025 at 8:00 PM
+            const concertDate = new Date(2025, 7, 13, 20, 0, 0); // August 13th, 2025 at 8:00 PM
+            
+            // Get current date and time
+            const now = new Date();
+            
+            // Calculate time difference
+            let timeDiff = concertDate - now;
+            
+            // If current date is past concert date, show zeros
+            if (timeDiff < 0) {
+                document.getElementById('concert-days').textContent = '0';
+                document.getElementById('concert-hours').textContent = '00';
+                document.getElementById('concert-minutes').textContent = '00';
+                document.getElementById('concert-seconds').textContent = '00';
+                return;
+            }
+            
+            // Calculate days
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            
+            // Calculate hours
+            let remainingTime = timeDiff - days * 1000 * 60 * 60 * 24;
+            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+            
+            // Calculate minutes
+            remainingTime -= hours * (1000 * 60 * 60);
+            const minutes = Math.floor(remainingTime / (1000 * 60));
+            
+            // Calculate seconds
+            remainingTime -= minutes * (1000 * 60);
+            const seconds = Math.floor(remainingTime / 1000);
+            
+            // Update the display
+            document.getElementById('concert-days').textContent = days;
+            document.getElementById('concert-hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('concert-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('concert-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+        }
+        
+        // Return date countdown timer
+        function updateReturnTimer() {
+            // Set the return date to August 10th, 2025 at 1:00 AM
+            const returnDate = new Date(2025, 7, 10, 1, 0, 0); // August 10th, 2025 at 1:00 AM
+            
+            // Get current date and time
+            const now = new Date();
+            
+            // Calculate time difference
+            let timeDiff = returnDate - now;
+            
+            // If current date is past return date, show zeros
+            if (timeDiff < 0) {
+                document.getElementById('return-days').textContent = '0';
+                document.getElementById('return-hours').textContent = '00';
+                document.getElementById('return-minutes').textContent = '00';
+                document.getElementById('return-seconds').textContent = '00';
+                return;
+            }
+            
+            // Calculate days
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            
+            // Calculate hours
+            let remainingTime = timeDiff - days * 1000 * 60 * 60 * 24;
+            const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+            
+            // Calculate minutes
+            remainingTime -= hours * (1000 * 60 * 60);
+            const minutes = Math.floor(remainingTime / (1000 * 60));
+            
+            // Calculate seconds
+            remainingTime -= minutes * (1000 * 60);
+            const seconds = Math.floor(remainingTime / 1000);
+            
+            // Update the display
+            document.getElementById('return-days').textContent = days;
+            document.getElementById('return-hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('return-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('return-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+        }
 
         // Setup floating hearts background
         document.addEventListener('DOMContentLoaded', function() {
@@ -665,12 +800,24 @@
             setupHearts('hearts-canvas-pw');
             setupHearts('hearts-canvas');
             setupHearts('hearts-canvas2');
+            setupHearts('hearts-canvas3');
+            setupHearts('hearts-canvas4');
             
             // Check if user has already authenticated in this session
             const isAuthenticated = sessionStorage.getItem('authenticated');
             if (isAuthenticated === 'true') {
                 showPage('page1');
             }
+            
+            // Initial update for all timers
+            updateTimer();
+            updateConcertTimer();
+            updateReturnTimer();
+            
+            // Set interval for timers
+            setInterval(updateTimer, 1000);
+            setInterval(updateConcertTimer, 1000);
+            setInterval(updateReturnTimer, 1000);
         });
         
         function setupHearts(canvasId) {
