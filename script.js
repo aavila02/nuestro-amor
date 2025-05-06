@@ -338,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupHearts('hearts-canvas2');
     setupHearts('hearts-canvas3');
     setupHearts('hearts-canvas4');
+    setupHearts('hearts-canvas5');
     
     // Check if user has already authenticated in this session
     const isAuthenticated = sessionStorage.getItem('authenticated');
