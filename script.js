@@ -10,7 +10,7 @@ function showPage(pageId) {
         resetFoodPicker();
         
         // Ensure the title is correct
-        document.querySelector('.food-picker-title').textContent = "Where Should We Eat?";
+        document.querySelector('.food-picker-title').textContent = "Where are we being bigbacks?";
         
         // Set default example values after a short delay (for better mobile experience)
         setTimeout(() => {
