@@ -761,3 +761,11 @@ canvas {
         font-size: 26px;
     }
 }
+.wheel-button {
+    background-color: #7b2cbf;
+    margin-top: 15px;
+}
+
+.wheel-button:hover {
+    background-color: #9d4edd;
+}
