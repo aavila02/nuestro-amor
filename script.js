@@ -15,7 +15,7 @@ function showPage(pageId) {
         // Set default example values after a short delay (for better mobile experience)
         setTimeout(() => {
             if(document.getElementById('food-options').value === '') {
-                document.getElementById('food-options').value = "Chipotle\nWendy's\nMcDonald's";
+                document.getElementById('food-options').value = "";
             }
         }, 300);
     }
@@ -263,7 +263,7 @@ function resetFoodPicker() {
     document.getElementById('food-options').value = '';
     document.getElementById('food-options').style.textAlign = 'center';
     
-    document.getElementById('pick-food-btn').textContent = "Let's Pick!";
+    document.getElementById('pick-food-btn').textContent = "Pick!";
     document.getElementById('pick-food-btn').style.display = 'block';
     
     document.getElementById('countdown-display').style.display = 'none';
