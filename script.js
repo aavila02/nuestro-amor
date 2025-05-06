@@ -4,6 +4,11 @@ function showPage(pageId) {
         page.classList.remove('active');
     });
     document.getElementById(pageId).classList.add('active');
+    
+    // Reset food picker elements when showing the food picker page
+    if(pageId === 'food-picker-page') {
+        resetFoodPicker();
+    }
 }
 
 // Password validation
@@ -169,6 +174,89 @@ function updateReturnTimer() {
     document.getElementById('return-hours').textContent = hours < 10 ? '0' + hours : hours;
     document.getElementById('return-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
     document.getElementById('return-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+}
+
+// Food Picker Functions
+function startFoodPicker() {
+    // Get the food options from textarea
+    const optionsText = document.getElementById('food-options').value.trim();
+    
+    // Check if there are any options
+    if(!optionsText) {
+        alert('Please enter at least one food option!');
+        return;
+    }
+    
+    // Parse the options (split by new line)
+    const options = optionsText.split('\n').filter(option => option.trim());
+    
+    // Make sure there's at least one valid option
+    if(options.length === 0) {
+        alert('Please enter at least one food option!');
+        return;
+    }
+    
+    // Hide the input and pick button
+    document.getElementById('food-options').disabled = true;
+    document.getElementById('pick-food-btn').style.display = 'none';
+    
+    // Show the countdown
+    const countdownDisplay = document.getElementById('countdown-display');
+    countdownDisplay.style.display = 'flex';
+    const countdownNumber = document.getElementById('countdown-number');
+    
+    // Start countdown
+    let count = 3;
+    countdownNumber.textContent = count;
+    
+    const countdownInterval = setInterval(() => {
+        count--;
+        
+        if(count > 0) {
+            countdownNumber.textContent = count;
+        } else {
+            // Clear the interval
+            clearInterval(countdownInterval);
+            
+            // Hide countdown
+            countdownDisplay.style.display = 'none';
+            
+            // Show the result
+            showFoodResult(options);
+        }
+    }, 1000);
+}
+
+function showFoodResult(options) {
+    // Pick a random option
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const selectedOption = options[randomIndex];
+    
+    // Display the result
+    const resultContainer = document.getElementById('result-container');
+    const foodResult = document.getElementById('food-result');
+    
+    foodResult.textContent = selectedOption;
+    resultContainer.style.display = 'flex';
+    
+    // Show the pick again button after a short delay
+    setTimeout(() => {
+        const pickButton = document.getElementById('pick-food-btn');
+        pickButton.textContent = 'Pick Again!';
+        pickButton.style.display = 'block';
+    }, 1500);
+}
+
+function resetFoodPicker() {
+    // Reset all elements to initial state
+    document.getElementById('food-options').disabled = false;
+    document.getElementById('food-options').value = '';
+    
+    document.getElementById('pick-food-btn').textContent = "Let's Pick!";
+    document.getElementById('pick-food-btn').style.display = 'block';
+    
+    document.getElementById('countdown-display').style.display = 'none';
+    document.getElementById('result-container').style.display = 'none';
 }
 
 // Setup floating hearts background
