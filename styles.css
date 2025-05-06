@@ -403,6 +403,8 @@ h1 {
     width: 90%;
     max-width: 500px;
     margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
     animation: fadeIn 1.5s forwards;
 }
 
@@ -418,6 +420,7 @@ h1 {
     resize: none;
     outline: none;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .food-options-input:focus {
@@ -427,6 +430,7 @@ h1 {
 
 .food-options-input::placeholder {
     color: #aaa;
+    text-align: center;
 }
 
 .pick-food-button {
@@ -442,6 +446,10 @@ h1 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     animation: fadeIn 2s forwards;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
 }
 
 .pick-food-button:hover {
@@ -469,6 +477,7 @@ h1 {
     display: none;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     padding: 25px;
@@ -477,12 +486,15 @@ h1 {
     max-width: 90%;
     width: 400px;
     animation: popIn 0.5s forwards;
+    text-align: center;
 }
 
 .result-title {
     font-size: 24px;
     color: #333;
     margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
 }
 
 .food-result {
@@ -492,6 +504,8 @@ h1 {
     margin: 15px 0;
     text-transform: uppercase;
     animation: resultPulse 2s infinite;
+    text-align: center;
+    width: 100%;
 }
 
 .result-heart {
