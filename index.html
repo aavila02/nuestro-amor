@@ -46,7 +46,7 @@
                 </svg>
             </button>
             <button class="button food-picker-button" onclick="showPage('food-picker-page')">
-                BigBacks?
+                Where Should We Eat?
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -156,12 +156,9 @@
     <div class="page" id="food-picker-page">
         <canvas id="hearts-canvas5"></canvas>
         <div class="food-picker-container">
-            <div class="food-picker-title">Where Are We Being BigBacks?</div>
+            <div class="food-picker-title">Where Should We Eat?</div>
             <div class="food-input-container">
-                <textarea id="food-options" class="food-options-input" placeholder="Enter food options here, one per line:
-Chipotle
-Wendy's
-McDonald's"></textarea>
+                <textarea id="food-options" class="food-options-input" placeholder="Enter food options here, one per line:"></textarea>
             </div>
             <button id="pick-food-btn" class="pick-food-button" onclick="startFoodPicker()">
                 Let's Pick!
@@ -176,6 +173,7 @@ McDonald's"></textarea>
             <div id="result-container" class="result-container">
                 <div class="result-title">You're eating at:</div>
                 <div id="food-result" class="food-result"></div>
+                <div class="result-heart">❤️</div>
             </div>
             
             <button class="back-button" onclick="showPage('page1')">

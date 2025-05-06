@@ -8,6 +8,16 @@ function showPage(pageId) {
     // Reset food picker elements when showing the food picker page
     if(pageId === 'food-picker-page') {
         resetFoodPicker();
+        
+        // Ensure the title is correct
+        document.querySelector('.food-picker-title').textContent = "Where Should We Eat?";
+        
+        // Set default example values after a short delay (for better mobile experience)
+        setTimeout(() => {
+            if(document.getElementById('food-options').value === '') {
+                document.getElementById('food-options').value = "Chipotle\nWendy's\nMcDonald's";
+            }
+        }, 300);
     }
 }
 
@@ -251,6 +261,7 @@ function resetFoodPicker() {
     // Reset all elements to initial state
     document.getElementById('food-options').disabled = false;
     document.getElementById('food-options').value = '';
+    document.getElementById('food-options').style.textAlign = 'center';
     
     document.getElementById('pick-food-btn').textContent = "Let's Pick!";
     document.getElementById('pick-food-btn').style.display = 'block';
