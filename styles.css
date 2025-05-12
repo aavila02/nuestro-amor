@@ -762,10 +762,10 @@ canvas {
     }
 }
 .wheel-button {
-    background-color: #7b2cbf;
+    background-color: #ff6b95;
     margin-top: 15px;
 }
 
 .wheel-button:hover {
-    background-color: #9d4edd;
+    background-color: #ff85a8;
 }
