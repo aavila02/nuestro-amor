@@ -2,112 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Spin the Wheel</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: sans-serif;
       text-align: center;
       padding: 30px;
-      background-color: #ffccd5;
-      color: #333;
+      background: #f0f0f0;
     }
-    
-    h1 {
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
-      font-size: 32px;
-    }
-    
     textarea {
       width: 300px;
       height: 100px;
-      padding: 10px;
-      border: none;
-      border-radius: 15px;
-      background-color: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      font-size: 16px;
-      margin-bottom: 15px;
-      resize: none;
-      outline: none;
     }
-    
     button {
-      padding: 10px 20px;
-      background-color: #e75480;
-      color: white;
-      border: none;
-      border-radius: 30px;
+      margin-top: 10px;
+      padding: 8px 15px;
       font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      margin: 10px 0 20px 0;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
-    
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-    
     #wheelCanvas {
-      margin: 20px auto;
-      border: 5px solid white;
+      margin-top: 20px;
+      border: 5px solid #333;
       border-radius: 50%;
-      background-color: white;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-      max-width: 90%;
     }
-    
     #result {
-      margin: 20px 0;
+      margin-top: 20px;
       font-size: 28px;
       font-weight: bold;
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      color: green;
       opacity: 0;
       transition: opacity 1s;
-    }
-    
-    .back-button {
-      background-color: #e75480;
-      display: inline-flex;
-      align-items: center;
-      margin-top: 30px;
-    }
-    
-    .back-button svg {
-      margin-right: 5px;
-    }
-    
-    .signature {
-      font-family: 'Brush Script MT', cursive;
-      font-size: 28px;
-      color: #e75480;
-      margin-top: 30px;
-      text-align: right;
-      width: 100%;
     }
   </style>
 </head>
 <body>
-  <h1>Where are we being bigbacks?</h1>
+  <h1>🎡 Suspense Spin the Wheel</h1>
   <textarea id="inputItems" placeholder="Enter one item per line..."></textarea><br>
   <button onclick="spin()">Spin</button>
   <canvas id="wheelCanvas" width="400" height="400"></canvas>
   <div id="result"></div>
-  
-  <button class="back-button" onclick="window.location.href='index.html'">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Back to Main Page
-  </button>
-  
-  <div class="signature">- Anthony</div>
 
   <script>
     const canvas = document.getElementById('wheelCanvas');
@@ -122,38 +55,44 @@
     }
 
     function drawWheel(items) {
-    const radius = canvas.width / 2;
-    const angleStep = (2 * Math.PI) / items.length;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const radius = canvas.width / 2;
+      const angleStep = (2 * Math.PI) / items.length;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    items.forEach((item, i) => {
-      const startAngle = i * angleStep + angle;
-      const endAngle = startAngle + angleStep;
+      items.forEach((item, i) => {
+        const startAngle = i * angleStep + angle;
+        const endAngle = startAngle + angleStep;
 
+        ctx.beginPath();
+        ctx.moveTo(radius, radius);
+        ctx.arc(radius, radius, radius, startAngle, endAngle);
+        ctx.fillStyle = i % 2 === 0 ? '#FFC107' : '#FF7043';
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(radius, radius);
+        ctx.rotate(startAngle + angleStep / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "16px sans-serif";
+        ctx.fillText(item.trim(), radius - 10, 5);
+        ctx.restore();
+      });
+
+      // Draw pointer
       ctx.beginPath();
-      ctx.moveTo(radius, radius);
-      ctx.arc(radius, radius, radius, startAngle, endAngle);
-      ctx.fillStyle = i % 2 === 0 ? '#ffccd5' : '#e75480';
+      ctx.moveTo(radius - 10, 0);
+      ctx.lineTo(radius + 10, 0);
+      ctx.lineTo(radius, 30);
+      ctx.fillStyle = "red";
       ctx.fill();
 
-      ctx.save();
-      ctx.translate(radius, radius);
-      ctx.rotate(startAngle + angleStep / 2);
-      ctx.textAlign = "right";
-      ctx.fillStyle = "#000";
-      ctx.font = "16px sans-serif";
-      ctx.fillText(item.trim(), radius - 10, 5);
-      ctx.restore();
-    });
-
-    // Draw pointer
-    ctx.beginPath();
-    ctx.moveTo(radius - 10, 0);
-    ctx.lineTo(radius + 10, 0);
-    ctx.lineTo(radius, 30);
-    ctx.fillStyle = "red";
-    ctx.fill();
-  }
+      // Draw selection dot at top (pointer)
+      ctx.beginPath();
+      ctx.arc(radius, radius - radius + 15, 5, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+    }
 
     function spin() {
       if (spinning) return;
@@ -181,9 +120,9 @@
         if (t < 1) {
           requestAnimationFrame(animate);
         } else {
-          const finalDeg = (angle * 180 / Math.PI) % 360;
-          const index = items.length - Math.floor((finalDeg / 360) * items.length) - 1;
-          const selected = items[(index + items.length) % items.length];
+          const finalDeg = (angle * 180 / Math.PI + 90) % 360; // Offset by 90 degrees
+          const index = Math.floor((360 - finalDeg) / (360 / items.length)) % items.length;
+          const selected = items[index];
 
           setTimeout(() => {
             confetti({
@@ -201,21 +140,7 @@
       requestAnimationFrame(animate);
     }
 
-    // Adjust canvas size for mobile
-    function adjustCanvasSize() {
-      if (window.innerWidth < 500) {
-        canvas.width = Math.min(window.innerWidth - 60, 300);
-        canvas.height = canvas.width;
-      } else {
-        canvas.width = 400;
-        canvas.height = 400;
-      }
-      drawWheel(["Enter", "Items", "Above"]);
-    }
-
-    // Initial draw and setup
-    adjustCanvasSize();
-    window.addEventListener('resize', adjustCanvasSize);
+    drawWheel(["Enter", "Items", "Above"]);
   </script>
 </body>
 </html>
