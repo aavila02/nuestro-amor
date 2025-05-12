@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Spin the Wheel</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
@@ -22,7 +23,7 @@
     h1 {
       color: #e75480;
       margin-bottom: 15px;
-      font-size: 32px;
+      font-size: 28px;
       animation: fadeIn 2s forwards;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
     }
@@ -40,6 +41,8 @@
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       resize: none;
+      -webkit-appearance: none;
+      appearance: none;
     }
     
     textarea:focus {
@@ -58,6 +61,9 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      -webkit-appearance: none;
+      appearance: none;
+      touch-action: manipulation;
     }
     
     button:hover {
@@ -74,6 +80,8 @@
       max-width: 90%;
       height: auto;
       animation: fadeIn 1.5s forwards;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     
     #result {
@@ -195,20 +203,39 @@
     
     @media (max-width: 767px) {
       h1 {
-        font-size: 28px;
+        font-size: 24px;
       }
       
       #wheelCanvas {
         width: 300px;
         height: 300px;
+        margin-top: 15px;
       }
       
       #result {
-        font-size: 24px;
+        font-size: 22px;
       }
       
       .signature {
-        font-size: 24px;
+        font-size: 22px;
+      }
+      
+      button {
+        padding: 10px 25px;
+        font-size: 15px;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      textarea {
+        height: 80px;
+      }
+      
+      .heart {
+        font-size: 32px;
+        margin: 5px 0;
       }
     }
   </style>
@@ -219,6 +246,7 @@
     <div class="border"></div>
     <div class="heart">❤️</div>
     <h1>Where are we being Big Backs??</h1>
+    <div class="heart">❤️</div>
     <textarea id="inputItems" placeholder="Enter one item per line..."></textarea><br>
     <button onclick="spin()">Spin</button>
     <canvas id="wheelCanvas" width="400" height="400"></canvas>
@@ -264,8 +292,10 @@
         ctx.rotate(startAngle + angleStep / 2);
         ctx.textAlign = "right";
         ctx.fillStyle = "#333";
-        ctx.font = "16px Arial, sans-serif";
-        ctx.fillText(item.trim(), radius - 20, 5);
+        const fontSize = Math.min(16, radius * 0.08);
+        ctx.font = `${fontSize}px Arial, sans-serif`;
+        const textDistance = radius - (radius * 0.1);
+        ctx.fillText(item.trim().substring(0, 15), textDistance, 5);
         ctx.restore();
       });
 
@@ -320,7 +350,7 @@
               spread: 70,
               origin: { y: 0.6 }
             });
-            resultDiv.innerText = "Selected: " + selected;
+            resultDiv.innerText = "🎉 Selected: " + selected;
             resultDiv.style.opacity = 1;
             spinning = false;
           }, 300);
