@@ -131,12 +131,12 @@ h1 {
 }
 
 .return-button {
-    background-color: #4069b9;
+    background-color: #A53860;
     margin-top: 15px;
 }
 
 .return-button:hover {
-    background-color: #5078c8;
+    background-color: #670D2F;
 }
 
 .back-button {
@@ -378,141 +378,7 @@ h1 {
     animation: heartbeat 1.5s infinite;
 }
 
-/* Food Picker Page Styles */
-.food-picker-container {
-    background-color: #ffccd5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative;
-}
 
-.food-picker-title {
-    font-size: 36px;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    margin-bottom: 40px;
-    font-weight: bold;
-    animation: fadeIn 1s forwards;
-}
-
-.food-input-container {
-    width: 90%;
-    max-width: 500px;
-    margin-bottom: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: fadeIn 1.5s forwards;
-}
-
-.food-options-input {
-    width: 100%;
-    height: 150px;
-    padding: 15px;
-    border: none;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    font-size: 16px;
-    resize: none;
-    outline: none;
-    transition: all 0.3s ease;
-    text-align: center;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.5;
-}
-
-.food-options-input:focus {
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    background-color: white;
-}
-
-.food-options-input::placeholder {
-    color: #aaa;
-    text-align: center;
-    opacity: 0.7;
-}
-
-.pick-food-button {
-    padding: 15px 35px;
-    background-color: #e75480;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin-bottom: 40px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    animation: fadeIn 2s forwards;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    text-align: center;
-}
-
-.pick-food-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    background-color: #ff6b95;
-}
-
-.countdown-display {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0 40px 0;
-}
-
-.countdown-number {
-    font-size: 120px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-    animation: countdownPulse 1s infinite;
-}
-
-.result-container {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 40px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    max-width: 90%;
-    width: 400px;
-    animation: popIn 0.5s forwards;
-    text-align: center;
-}
-
-.result-title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center;
-    width: 100%;
-}
-
-.food-result {
-    font-size: 32px;
-    font-weight: bold;
-    color: #e75480;
-    margin: 15px 0;
-    text-transform: uppercase;
-    animation: resultPulse 2s infinite;
-    text-align: center;
-    width: 100%;
-}
 
 .result-heart {
     font-size: 40px;
@@ -653,24 +519,6 @@ canvas {
     .password-heart {
         font-size: 60px;
     }
-    .food-picker-title {
-        font-size: 42px;
-    }
-    .food-options-input {
-        font-size: 18px;
-    }
-    .pick-food-button {
-        font-size: 22px;
-    }
-    .countdown-number {
-        font-size: 150px;
-    }
-    .result-title {
-        font-size: 28px;
-    }
-    .food-result {
-        font-size: 38px;
-    }
 }
 
 @media (max-width: 767px) {
@@ -734,31 +582,6 @@ canvas {
     .page {
         min-height: 100%;
         padding: 20px 0;
-    }
-    .food-picker-title {
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
-    .food-options-input {
-        height: 120px;
-        font-size: 14px;
-    }
-    .pick-food-button {
-        padding: 12px 25px;
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-    .countdown-number {
-        font-size: 90px;
-    }
-    .result-container {
-        padding: 15px;
-    }
-    .result-title {
-        font-size: 20px;
-    }
-    .food-result {
-        font-size: 26px;
     }
 }
 .wheel-button {
