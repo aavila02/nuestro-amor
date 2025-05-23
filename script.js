@@ -19,6 +19,11 @@ function showPage(pageId) {
             }
         }, 300);
     }
+        // Handle picture page setup
+    if(pageId === 'picture-page') {
+        updateCurrentDate();
+        loadTodaysPicture();
+    }
 }
 
 // Password validation
@@ -438,6 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupHearts('hearts-canvas3');
     setupHearts('hearts-canvas4');
     setupHearts('hearts-canvas5');
+    setupHearts('hearts-canvas-picture');
     
     // Check if user has already authenticated in this session
     const isAuthenticated = sessionStorage.getItem('authenticated');
@@ -455,3 +461,57 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateConcertTimer, 1000);
     setInterval(updateReturnTimer, 1000);
 });
+
+// Picture page functions
+function updateCurrentDate() {
+    const now = new Date();
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric'
+    };
+    const dateString = now.toLocaleDateString('en-US', options);
+    document.getElementById('current-date').textContent = dateString;
+}
+
+function loadTodaysPicture() {
+    const img = document.getElementById('daily-picture');
+    const placeholder = document.getElementById('picture-placeholder');
+    
+    // Try different file extensions
+    const extensions = ['jpg', 'jpeg', 'png', 'heic'];
+    let currentExtension = 0;
+    
+    function tryNextExtension() {
+        if (currentExtension >= extensions.length) {
+            // All extensions failed, show placeholder
+            placeholder.style.display = 'flex';
+            img.style.display = 'none';
+            return;
+        }
+        
+        const extension = extensions[currentExtension];
+        const imageUrl = `pic.${extension}`;
+        
+        img.onload = function() {
+            // Image loaded successfully
+            placeholder.style.display = 'none';
+            img.style.display = 'block';
+            
+            // Adjust container to image size
+            const container = document.querySelector('.picture-container');
+            container.style.width = 'auto';
+            container.style.maxWidth = '90%';
+        };
+        
+        img.onerror = function() {
+            // Try next extension
+            currentExtension++;
+            tryNextExtension();
+        };
+        
+        img.src = imageUrl;
+    }
+    
+    tryNextExtension();
+}

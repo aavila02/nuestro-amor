@@ -51,6 +51,12 @@
                         <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
+            <button class="button picture-button" onclick="showPage('picture-page')">
+                Today's Picture
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+            </button>
             <button class="button wheel-button" onclick="window.location.href='test.html'">
                 BigBacks?
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,6 +78,35 @@
             <source src="te quiero tanto 4.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+    </div>
+    <!-- Picture Page -->
+    <div class="page" id="picture-page">
+        <canvas id="hearts-canvas-picture"></canvas>
+        <div class="picture-page-container">
+            <div class="picture-date-display" id="current-date">May 22, 2025</div>
+        
+            <div class="picture-container">
+                <div class="border"></div>
+                <!-- This will show when image loads successfully -->
+                <img id="daily-picture" class="picture-display" style="display: none;" />
+            
+                <!-- This shows when no image or loading fails -->
+                <div id="picture-placeholder" class="picture-placeholder">
+                    <div class="picture-icon">📷</div>
+                    <div>Today's Picture Will Display Here</div>
+                    <div class="picture-caption">(pic.jpg/png/heic)</div>
+                </div>
+            </div>
+        
+            <button class="back-button" onclick="showPage('page1')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back
+            </button>
+        
+            <div class="signature" style="margin-top: 30px; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">- Anthony</div>
+        </div>
     </div>
 
     <!-- Return Countdown Page -->
