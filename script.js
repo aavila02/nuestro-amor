@@ -29,7 +29,7 @@ function showPage(pageId) {
 // Password validation
 function checkPassword() {
     const password = document.getElementById('password-input').value;
-    const correctPassword = "ariadne123"; // Set your password here
+    const correctPassword = "ariadne123";
     const errorElement = document.getElementById('password-error');
     const container = document.querySelector('.password-container');
     
