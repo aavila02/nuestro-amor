@@ -152,7 +152,7 @@ function updateConcertTimer() {
 // Return date countdown timer
 function updateReturnTimer() {
     // Set the return date to August 10th, 2025 at 1:00 AM
-    const returnDate = new Date(2025, 7, 10, 1, 0, 0); // August 10th, 2025 at 1:00 AM
+    const returnDate = new Date(2025, 5, 6, 1, 0, 0); // August 10th, 2025 at 1:00 AM
     
     // Get current date and time
     const now = new Date();
@@ -452,13 +452,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Initial update for all timers
-    updateProgressBar();  // <- DELETE WHEN DONE
     updateTimer();
     updateConcertTimer();
     updateReturnTimer();
     
     // Set interval for timers
-    setInterval(updateProgressBar, 1000);  // <- DELETE WHEN DONE
     setInterval(updateTimer, 1000);
     setInterval(updateConcertTimer, 1000);
     setInterval(updateReturnTimer, 1000);
@@ -517,32 +515,3 @@ function loadTodaysPicture() {
     
     tryNextExtension();
 }
-
-
-
-//PROGRESS BAR STUFF DELETE (BEGINNING)
-function updateProgressBar() {
-    const startDate = new Date(2025, 5, 1); // June 1st, 2025
-    const endDate = new Date(2025, 7, 9); // August 9th, 2025
-    const currentDate = new Date();
-    
-    // Calculate total duration and elapsed time
-    const totalDuration = endDate - startDate;
-    const elapsedTime = currentDate - startDate;
-    
-    // Calculate percentage
-    let percentage = (elapsedTime / totalDuration) * 100;
-    
-    // Clamp between 0 and 100
-    percentage = Math.max(0, Math.min(100, percentage));
-    
-    // Update progress bar
-    const progressFill = document.getElementById('progress-fill');
-    const progressPercentage = document.getElementById('progress-percentage');
-    
-    if (progressFill && progressPercentage) {
-        progressFill.style.width = percentage + '%';
-        progressPercentage.textContent = percentage.toFixed(1) + '%';
-    }
-}
-//DELETE WHEN DONE
