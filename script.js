@@ -64,7 +64,7 @@ function checkEnter(event) {
 function updateTimer() {
     // Set the date we're counting from (March 8th, 2025)
     const startDate = new Date(2025, 2, 8); // Month is 0-based, so 2 = March
-    
+    //2025,2,9,-8,19,0
     // Get current date and time
     const now = new Date();
     
@@ -147,48 +147,6 @@ function updateConcertTimer() {
     document.getElementById('concert-hours').textContent = hours < 10 ? '0' + hours : hours;
     document.getElementById('concert-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
     document.getElementById('concert-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-}
-
-// Return date countdown timer
-function updateReturnTimer() {
-    // Set the return date to August 10th, 2025 at 1:00 AM
-    const returnDate = new Date(2025, 5, 6, 1, 0, 0); // August 10th, 2025 at 1:00 AM
-    
-    // Get current date and time
-    const now = new Date();
-    
-    // Calculate time difference
-    let timeDiff = returnDate - now;
-    
-    // If current date is past return date, show zeros
-    if (timeDiff < 0) {
-        document.getElementById('return-days').textContent = '0';
-        document.getElementById('return-hours').textContent = '00';
-        document.getElementById('return-minutes').textContent = '00';
-        document.getElementById('return-seconds').textContent = '00';
-        return;
-    }
-    
-    // Calculate days
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    
-    // Calculate hours
-    let remainingTime = timeDiff - days * 1000 * 60 * 60 * 24;
-    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-    
-    // Calculate minutes
-    remainingTime -= hours * (1000 * 60 * 60);
-    const minutes = Math.floor(remainingTime / (1000 * 60));
-    
-    // Calculate seconds
-    remainingTime -= minutes * (1000 * 60);
-    const seconds = Math.floor(remainingTime / 1000);
-    
-    // Update the display
-    document.getElementById('return-days').textContent = days;
-    document.getElementById('return-hours').textContent = hours < 10 ? '0' + hours : hours;
-    document.getElementById('return-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-    document.getElementById('return-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
 }
 
 // Food Picker Functions
