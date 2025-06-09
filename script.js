@@ -1,9 +1,237 @@
+// Smooth, efficient timer implementation with better performance and accuracy
+
+class RelationshipTimer {
+    constructor(startDate) {
+        this.startDate = new Date(startDate);
+        this.isRunning = false;
+        this.animationFrame = null;
+        this.lastUpdate = 0;
+        this.elements = {};
+        
+        // Cache DOM elements once
+        this.cacheElements();
+    }
+    
+    cacheElements() {
+        this.elements = {
+            months: document.getElementById('months'),
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
+        };
+    }
+    
+    // More accurate time calculation using exact date math
+    calculateTime() {
+        const now = new Date();
+        
+        if (now < this.startDate) {
+            return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+        
+        // Calculate months and days more accurately
+        let years = now.getFullYear() - this.startDate.getFullYear();
+        let months = now.getMonth() - this.startDate.getMonth();
+        let days = now.getDate() - this.startDate.getDate();
+        
+        // Adjust for negative days
+        if (days < 0) {
+            months--;
+            const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+        
+        // Adjust for negative months
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+        
+        // Convert years to months
+        months += years * 12;
+        
+        // Calculate time components for the current day
+        const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const startDateTime = new Date(this.startDate.getFullYear(), this.startDate.getMonth(), this.startDate.getDate());
+        
+        let timeToday;
+        if (startOfToday.getTime() === startDateTime.getTime()) {
+            // Same day as start date, calculate from start time
+            timeToday = now - this.startDate;
+        } else {
+            // Different day, calculate from start of today
+            timeToday = now - startOfToday;
+        }
+        
+        const hours = Math.floor(timeToday / (1000 * 60 * 60));
+        const minutes = Math.floor((timeToday % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeToday % (1000 * 60)) / 1000);
+        
+        return { months, days, hours, minutes, seconds };
+    }
+    
+    // Smooth update using requestAnimationFrame for better performance
+    update() {
+        const now = performance.now();
+        
+        // Only update display once per second to avoid unnecessary DOM manipulation
+        if (now - this.lastUpdate >= 1000) {
+            this.updateDisplay();
+            this.lastUpdate = now;
+        }
+        
+        if (this.isRunning) {
+            this.animationFrame = requestAnimationFrame(() => this.update());
+        }
+    }
+    
+    updateDisplay() {
+        // Check if elements exist (re-cache if needed)
+        if (!this.elements.months) {
+            this.cacheElements();
+        }
+        
+        // If still no elements, skip update
+        if (!this.elements.months) return;
+        
+        const time = this.calculateTime();
+        
+        // Batch DOM updates for better performance
+        requestAnimationFrame(() => {
+            this.elements.months.textContent = time.months;
+            this.elements.days.textContent = time.days;
+            this.elements.hours.textContent = time.hours.toString().padStart(2, '0');
+            this.elements.minutes.textContent = time.minutes.toString().padStart(2, '0');
+            this.elements.seconds.textContent = time.seconds.toString().padStart(2, '0');
+        });
+    }
+    
+    start() {
+        if (this.isRunning) return;
+        
+        this.isRunning = true;
+        this.lastUpdate = 0; // Force immediate update
+        this.update();
+    }
+    
+    stop() {
+        this.isRunning = false;
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+    }
+    
+    // Method to force immediate update (useful for testing)
+    refresh() {
+        this.updateDisplay();
+    }
+}
+
+// Concert timer class (similar smooth implementation)
+class ConcertTimer {
+    constructor(concertDate) {
+        this.concertDate = new Date(concertDate);
+        this.isRunning = false;
+        this.animationFrame = null;
+        this.lastUpdate = 0;
+        this.elements = {};
+        
+        this.cacheElements();
+    }
+    
+    cacheElements() {
+        this.elements = {
+            days: document.getElementById('concert-days'),
+            hours: document.getElementById('concert-hours'),
+            minutes: document.getElementById('concert-minutes'),
+            seconds: document.getElementById('concert-seconds')
+        };
+    }
+    
+    calculateTime() {
+        const now = new Date();
+        const timeDiff = this.concertDate - now;
+        
+        if (timeDiff <= 0) {
+            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+        
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        
+        return { days, hours, minutes, seconds };
+    }
+    
+    update() {
+        const now = performance.now();
+        
+        if (now - this.lastUpdate >= 1000) {
+            this.updateDisplay();
+            this.lastUpdate = now;
+        }
+        
+        if (this.isRunning) {
+            this.animationFrame = requestAnimationFrame(() => this.update());
+        }
+    }
+    
+    updateDisplay() {
+        if (!this.elements.days) {
+            this.cacheElements();
+        }
+        
+        if (!this.elements.days) return;
+        
+        const time = this.calculateTime();
+        
+        requestAnimationFrame(() => {
+            this.elements.days.textContent = time.days;
+            this.elements.hours.textContent = time.hours.toString().padStart(2, '0');
+            this.elements.minutes.textContent = time.minutes.toString().padStart(2, '0');
+            this.elements.seconds.textContent = time.seconds.toString().padStart(2, '0');
+        });
+    }
+    
+    start() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.lastUpdate = 0;
+        this.update();
+    }
+    
+    stop() {
+        this.isRunning = false;
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+    }
+}
+
+// Global timer instances
+let relationshipTimer = null;
+let concertTimer = null;
+
+// Initialize timers
+function initializeTimers() {
+    relationshipTimer = new RelationshipTimer('2025-03-08T00:00:00');
+    concertTimer = new ConcertTimer('2025-08-13T20:00:00'); // August 13th, 2025 at 8:00 PM
+}
+
 // Function to show specific page
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
     document.getElementById(pageId).classList.add('active');
+    
+    // Stop all timers first
+    if (relationshipTimer) relationshipTimer.stop();
+    if (concertTimer) concertTimer.stop();
     
     // Reset food picker elements when showing the food picker page
     if(pageId === 'food-picker-page') {
@@ -23,6 +251,20 @@ function showPage(pageId) {
     if(pageId === 'picture-page') {
         updateCurrentDate();
         loadTodaysPicture();
+    }
+    
+    // Start appropriate timer based on page
+    if(pageId === 'page2' && relationshipTimer) {
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+            relationshipTimer.start();
+        }, 50);
+    }
+    
+    if(pageId === 'concert-page' && concertTimer) {
+        setTimeout(() => {
+            concertTimer.start();
+        }, 50);
     }
 }
 
@@ -58,95 +300,6 @@ function checkEnter(event) {
     if (event.key === "Enter") {
         checkPassword();
     }
-}
-
-// Setup the relationship timer
-function updateTimer() {
-    // Set the date we're counting from (March 8th, 2025)
-    const startDate = new Date(2025, 2, 8); // Month is 0-based, so 2 = March
-    //2025,2,9,-8,19,0
-    // Get current date and time
-    const now = new Date();
-    
-    // Calculate time difference
-    let timeDiff = now - startDate;
-    
-    // If current date is before start date, show zeros
-    if (timeDiff < 0) {
-        document.getElementById('months').textContent = '0';
-        document.getElementById('days').textContent = '0';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
-        return;
-    }
-    
-    // Calculate months (approximate, using 30.44 days per month)
-    const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30.44));
-    
-    // Calculate remaining days after removing full months
-    const days = Math.floor((timeDiff - months * 1000 * 60 * 60 * 24 * 30.44) / (1000 * 60 * 60 * 24));
-    
-    // Calculate hours
-    let remainingTime = timeDiff - months * 1000 * 60 * 60 * 24 * 30.44 - days * 1000 * 60 * 60 * 24;
-    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-    
-    // Calculate minutes
-    remainingTime -= hours * (1000 * 60 * 60);
-    const minutes = Math.floor(remainingTime / (1000 * 60));
-    
-    // Calculate seconds
-    remainingTime -= minutes * (1000 * 60);
-    const seconds = Math.floor(remainingTime / 1000);
-    
-    // Update the display
-    document.getElementById('months').textContent = months;
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-    document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-    document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-}
-
-// Kevin Kaarl Concert countdown timer
-function updateConcertTimer() {
-    // Set the concert date to August 13th, 2025 at 8:00 PM
-    const concertDate = new Date(2025, 7, 13, 20, 0, 0); // August 13th, 2025 at 8:00 PM
-    
-    // Get current date and time
-    const now = new Date();
-    
-    // Calculate time difference
-    let timeDiff = concertDate - now;
-    
-    // If current date is past concert date, show zeros
-    if (timeDiff < 0) {
-        document.getElementById('concert-days').textContent = '0';
-        document.getElementById('concert-hours').textContent = '00';
-        document.getElementById('concert-minutes').textContent = '00';
-        document.getElementById('concert-seconds').textContent = '00';
-        return;
-    }
-    
-    // Calculate days
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    
-    // Calculate hours
-    let remainingTime = timeDiff - days * 1000 * 60 * 60 * 24;
-    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-    
-    // Calculate minutes
-    remainingTime -= hours * (1000 * 60 * 60);
-    const minutes = Math.floor(remainingTime / (1000 * 60));
-    
-    // Calculate seconds
-    remainingTime -= minutes * (1000 * 60);
-    const seconds = Math.floor(remainingTime / 1000);
-    
-    // Update the display
-    document.getElementById('concert-days').textContent = days;
-    document.getElementById('concert-hours').textContent = hours < 10 ? '0' + hours : hours;
-    document.getElementById('concert-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-    document.getElementById('concert-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
 }
 
 // Food Picker Functions
@@ -394,6 +547,11 @@ function toggleMusic() {
 
 // Setup all needed functionality when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing smooth timers...');
+    
+    // Initialize timer classes
+    initializeTimers();
+    
     // Run hearts effect for all pages
     setupHearts('hearts-canvas-pw');
     setupHearts('hearts-canvas');
@@ -409,15 +567,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showPage('page1');
     }
     
-    // Initial update for all timers
-    updateTimer();
-    updateConcertTimer();
-    updateReturnTimer();
-    
-    // Set interval for timers
-    setInterval(updateTimer, 1000);
-    setInterval(updateConcertTimer, 1000);
-    setInterval(updateReturnTimer, 1000);
+    console.log('Smooth timer setup complete');
 });
 
 // Picture page functions
@@ -472,4 +622,10 @@ function loadTodaysPicture() {
     }
     
     tryNextExtension();
+}
+
+// Utility function for manual timer refresh (for debugging)
+function refreshTimers() {
+    if (relationshipTimer) relationshipTimer.refresh();
+    if (concertTimer) concertTimer.refresh();
 }
