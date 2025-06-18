@@ -647,7 +647,7 @@ async function loadTodaysPicture() {
             // Get the most recent uploaded picture
             const latestFile = data[0];
             const { data: urlData } = supabase.storage
-                .from('daily-pictures')
+                .from('daily.pictures')
                 .getPublicUrl(latestFile.name);
                 
             img.onload = function() {
