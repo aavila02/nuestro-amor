@@ -22,7 +22,7 @@ async function uploadPicture(file) {
         
         // Upload to Supabase storage
         const { data, error } = await supabase.storage
-            .from('-pictures')
+            .from('daily.pictures')
             .upload(fileName, file, {
                 cacheControl: '3600',
                 upsert: false
