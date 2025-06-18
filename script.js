@@ -22,7 +22,7 @@ async function uploadPicture(file) {
         
         // Upload to Supabase storage
         const { data, error } = await supabase.storage
-            .from('daily-pictures')
+            .from('-pictures')
             .upload(fileName, file, {
                 cacheControl: '3600',
                 upsert: false
@@ -637,7 +637,7 @@ async function loadTodaysPicture() {
     try {
         // First try to load from Supabase storage
         const { data, error } = await supabase.storage
-            .from('daily-pictures')
+            .from('daily.pictures')
             .list('', {
                 limit: 1,
                 sortBy: { column: 'created_at', order: 'desc' }
