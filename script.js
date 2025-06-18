@@ -5,7 +5,29 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// Upload picture function
+// Add this compression function before uploadPicture()
+function compressImage(file, maxWidth = 1200, quality = 0.8) {
+    return new Promise((resolve) => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        
+        img.onload = () => {
+            // Calculate new dimensions
+            const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
+            canvas.width = img.width * ratio;
+            canvas.height = img.height * ratio;
+            
+            // Draw and compress
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob(resolve, 'image/jpeg', quality);
+        };
+        
+        img.src = URL.createObjectURL(file);
+    });
+}
+
+// Updated upload function with smart compression
 async function uploadPicture(file) {
     if (!file) return;
     
@@ -16,14 +38,28 @@ async function uploadPicture(file) {
     uploadButton.disabled = true;
     
     try {
+        // Check file size (49MB = 49 * 1024 * 1024 bytes)
+        const maxSize = 49 * 1024 * 1024;
+        let finalFile = file;
+        
+        if (file.size > maxSize) {
+            console.log(`File size: ${(file.size / 1024 / 1024).toFixed(1)}MB - compressing...`);
+            uploadButton.innerHTML = '🔄 Compressing...';
+            finalFile = await compressImage(file);
+            console.log(`Compressed to: ${(finalFile.size / 1024 / 1024).toFixed(1)}MB`);
+        } else {
+            console.log(`File size: ${(file.size / 1024 / 1024).toFixed(1)}MB - no compression needed`);
+        }
+        
         // Create unique filename
         const fileExt = file.name.split('.').pop();
         const fileName = `pic-${Date.now()}.${fileExt}`;
         
         // Upload to Supabase storage
+        uploadButton.innerHTML = '📤 Uploading...';
         const { data, error } = await supabase.storage
             .from('daily.pictures')
-            .upload(fileName, file, {
+            .upload(fileName, finalFile, {
                 cacheControl: '3600',
                 upsert: false
             });
