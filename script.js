@@ -1,3 +1,51 @@
+// Supabase configuration
+const SUPABASE_URL = 'https://kaldxudmjetzyfreeriz.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImthbGR4dWRtamV0enlmcmVlcml6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyMTcwOTQsImV4cCI6MjA2NTc5MzA5NH0.zc9fms3JV5Sx-mk767EUhSp4uoSIFFmEpsWxZt4-cn8'
+
+// Initialize Supabase client
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+// Upload picture function
+async function uploadPicture(file) {
+    if (!file) return;
+    
+    // Show loading state
+    const uploadButton = document.querySelector('.upload-button');
+    const originalText = uploadButton.innerHTML;
+    uploadButton.innerHTML = '⏳ Uploading...';
+    uploadButton.disabled = true;
+    
+    try {
+        // Create unique filename
+        const fileExt = file.name.split('.').pop();
+        const fileName = `pic-${Date.now()}.${fileExt}`;
+        
+        // Upload to Supabase storage
+        const { data, error } = await supabase.storage
+            .from('daily-pictures')
+            .upload(fileName, file, {
+                cacheControl: '3600',
+                upsert: false
+            });
+            
+        if (error) {
+            console.error('Upload error:', error);
+            alert('Upload failed! Please try again.');
+        } else {
+            console.log('Upload successful:', data);
+            // Refresh the picture display
+            loadTodaysPicture();
+            alert('Picture uploaded successfully! 📷');
+        }
+    } catch (error) {
+        console.error('Upload error:', error);
+        alert('Upload failed! Please try again.');
+    } finally {
+        // Reset button
+        uploadButton.innerHTML = originalText;
+        uploadButton.disabled = false;
+    }
+}
 // Smooth, efficient timer implementation with better performance and accuracy
 
 class RelationshipTimer {
@@ -582,17 +630,54 @@ function updateCurrentDate() {
     document.getElementById('current-date').textContent = dateString;
 }
 
-function loadTodaysPicture() {
+async function loadTodaysPicture() {
     const img = document.getElementById('daily-picture');
     const placeholder = document.getElementById('picture-placeholder');
     
-    // Try different file extensions
+    try {
+        // First try to load from Supabase storage
+        const { data, error } = await supabase.storage
+            .from('daily-pictures')
+            .list('', {
+                limit: 1,
+                sortBy: { column: 'created_at', order: 'desc' }
+            });
+            
+        if (!error && data && data.length > 0) {
+            // Get the most recent uploaded picture
+            const latestFile = data[0];
+            const { data: urlData } = supabase.storage
+                .from('daily-pictures')
+                .getPublicUrl(latestFile.name);
+                
+            img.onload = function() {
+                placeholder.style.display = 'none';
+                img.style.display = 'block';
+            };
+            
+            img.onerror = function() {
+                fallbackToLocalPicture();
+            };
+            
+            img.src = urlData.publicUrl;
+            return;
+        }
+    } catch (error) {
+        console.log('Supabase error, falling back to local:', error);
+    }
+    
+    // Fallback to local pic files
+    fallbackToLocalPicture();
+}
+
+function fallbackToLocalPicture() {
+    const img = document.getElementById('daily-picture');
+    const placeholder = document.getElementById('picture-placeholder');
     const extensions = ['jpg', 'jpeg', 'png', 'heic'];
     let currentExtension = 0;
     
     function tryNextExtension() {
         if (currentExtension >= extensions.length) {
-            // All extensions failed, show placeholder
             placeholder.style.display = 'flex';
             img.style.display = 'none';
             return;
@@ -602,18 +687,11 @@ function loadTodaysPicture() {
         const imageUrl = `pic.${extension}`;
         
         img.onload = function() {
-            // Image loaded successfully
             placeholder.style.display = 'none';
             img.style.display = 'block';
-            
-            // Adjust container to image size
-            const container = document.querySelector('.picture-container');
-            container.style.width = 'auto';
-            container.style.maxWidth = '90%';
         };
         
         img.onerror = function() {
-            // Try next extension
             currentExtension++;
             tryNextExtension();
         };

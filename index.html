@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Nuestro Amor</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -91,6 +92,12 @@
                     <div class="picture-caption">(pic.jpg/png/heic)</div>
                 </div>
             </div>
+
+
+            <input type="file" id="picture-upload" accept="image/*" style="display: none;" onchange="uploadPicture(this.files[0])">
+            <button class="upload-button" onclick="document.getElementById('picture-upload').click()">
+                📷 Upload New Picture
+            </button>
         
             <button class="back-button" onclick="showPage('page1')">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
